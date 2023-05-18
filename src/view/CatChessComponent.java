@@ -30,6 +30,7 @@ public class CatChessComponent extends JComponent {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+
     }
 
     public int getRank() {

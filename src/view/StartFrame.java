@@ -29,9 +29,10 @@ public class StartFrame extends JFrame{
     private void addBeginButton() {
         JButton button = new JButton("Begin");
         button.addActionListener((e) -> {
-            ChessGameFrame mainFrame = new ChessGameFrame(1100, 810);
+            ChessGameFrame mainFrame = new ChessGameFrame(1100, 800);
             GameController gameController = new GameController(mainFrame.getChessboardComponent(), new Chessboard());
             mainFrame.setVisible(true);
+
         });
         button.setSize(240,80);
         add(button);

@@ -17,6 +17,7 @@ import view.CatChessComponent;
 import view.MouseChessComponent;
 
 import view.ChessboardComponent;
+import view.ChessGameFrame;
 
 /**
  * Controller is the connection between model and view,
@@ -27,13 +28,13 @@ import view.ChessboardComponent;
 */
 public class GameController implements GameListener {
 
-
     private Chessboard model;
     private ChessboardComponent view;
     private PlayerColor currentPlayer;
 
     // Record whether there is a selected piece before
     private ChessboardPoint selectedPoint;
+    private int turn=1;
 
     public GameController(ChessboardComponent view, Chessboard model) {
         this.view = view;
@@ -57,13 +58,16 @@ public class GameController implements GameListener {
 
     // after a valid move swap the player
     private void swapColor() {
+
         currentPlayer = currentPlayer == PlayerColor.BLUE ? PlayerColor.RED : PlayerColor.BLUE;
+
     }
 
     private boolean win() {
         // TODO: Check the board if there is a winner
         return false;
     }
+
 
 
     // click an empty cell
@@ -91,6 +95,13 @@ public class GameController implements GameListener {
             selectedPoint = null;
             swapColor();
             view.repaint();
+            turn++;
+            ChessGameFrame.getTurnlabel().setText(String.format("Turn: %d",turn));
+            if(turn%2==1) {
+                ChessGameFrame.getPlayerlabel().setText(String.format("Player: Blue"));
+            }else{
+                ChessGameFrame.getPlayerlabel().setText(String.format("Player: Red"));
+            }
             // TODO: if the chess enter Dens or Traps and so on
         }
     }
@@ -204,5 +215,13 @@ public class GameController implements GameListener {
             component.repaint();
         }
         // TODO: Implement capture function
+    }
+
+    public int getTurn() {
+        return turn;
+    }
+
+    public void setTurn(int turn) {
+        this.turn = turn;
     }
 }

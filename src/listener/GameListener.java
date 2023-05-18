@@ -12,7 +12,6 @@ import view.CatChessComponent;
 import view.MouseChessComponent;
 
 public interface GameListener {
-
     void onPlayerClickCell(ChessboardPoint point, CellComponent component);
 
 
