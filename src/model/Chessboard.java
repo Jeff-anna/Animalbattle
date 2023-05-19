@@ -64,7 +64,6 @@ public class Chessboard {
     private int calculateDistance(ChessboardPoint src, ChessboardPoint dest) {
         return Math.abs(src.getRow() - dest.getRow()) + Math.abs(src.getCol() - dest.getCol());
     }
-    //WHAT IS THE DIFFERENCE BETWEEN REMOVECHESSCOMPONENTATGRID??????????????????????
     private ChessPiece removeChessPiece(ChessboardPoint point) {
         ChessPiece chessPiece = getChessPieceAt(point);
         getGridAt(point).removePiece();
@@ -83,10 +82,14 @@ public class Chessboard {
     }
 
     public void captureChessPiece(ChessboardPoint src, ChessboardPoint dest) {
-        if (isValidCapture(src, dest)) {
+        if (!isValidCapture(src, dest)) {
             throw new IllegalArgumentException("Illegal chess capture!");
         }
         // TODO: Finish the method.
+        if (isValidCapture(src, dest)) {
+            removeChessPiece(dest);
+            moveChessPiece(src, dest);
+        }
     }
 
     public Cell[][] getGrid() {
@@ -105,7 +108,30 @@ public class Chessboard {
 
 
     public boolean isValidCapture(ChessboardPoint src, ChessboardPoint dest) {
-        // TODO:Fix this method
+        if (!getChessPieceOwner(src).equals(getChessPieceOwner(dest))) {
+            if (isOnLand(src) && getChessPieceAt(src).getRank() != 1 && getChessPieceAt(dest).getRank() != 1) {
+                return getChessPieceAt(src).getRank() >= getChessPieceAt(dest).getRank();
+            }else if (isOnLand(src)) {
+                if (getChessPieceAt(src).getRank() == 1 && getChessPieceAt(dest).getRank() == 8) {
+                    return true;
+                }
+                if (getChessPieceAt(src).getRank() != 8 && getChessPieceAt(src).getRank() >= getChessPieceAt(dest).getRank()) {
+                    return true;
+                }
+                if (getChessPieceAt(src).getRank() == 8 && getChessPieceAt(dest).getRank() == 1) {
+                    return false;
+                }
+            }else if (!isOnLand(src)) {
+                return !isOnLand(dest);
+            }
+            return false;
+        }
         return false;
     }
+     public boolean isOnLand(ChessboardPoint src){
+        if(src.getCol() >= 3 && src.getCol() <= 5) {
+            return src.getRow() != 1 && src.getRow() != 2 && src.getRow() != 4 && src.getRow() != 5;
+        }
+        return true;
+     }
 }

@@ -10,18 +10,12 @@ import java.awt.*;
  * This is the equivalent of the ChessPiece class,
  * but this class only cares how to draw Chess on ChessboardComponent
  */
-public class MouseChessComponent extends JComponent {
-    private PlayerColor owner;
-    private final int rank=1;
-
+public class MouseChessComponent extends ChessComponent {
     private boolean selected;
 
     public MouseChessComponent(PlayerColor owner, int size) {
-        this.owner = owner;
+        super(owner,1,size);
         this.selected = false;
-        setSize(size/2, size/2);
-        setLocation(0,0);
-        setVisible(true);
     }
 
     public boolean isSelected() {
@@ -33,21 +27,7 @@ public class MouseChessComponent extends JComponent {
     }
 
     public int getRank() {
-        return rank;
+        return super.getRank();
     }
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        Font font = new Font("楷体", Font.PLAIN, getWidth() / 2);
-        g2.setFont(font);
-        g2.setColor(owner.getColor());
-        g2.drawString("鼠", getWidth() / 4, getHeight() * 5 / 8); // FIXME: Use library to find the correct offset.
-        if (isSelected()) { // Highlights the model if selected.
-            g.setColor(Color.RED);
-            g.drawOval(0, 0, getWidth() , getHeight());
-        }
-    }
 }

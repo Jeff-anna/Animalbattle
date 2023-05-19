@@ -2,14 +2,15 @@ package view;
 
 
 import controller.GameController;
-import model.*;
+import model.Cell;
+import model.ChessPiece;
+import model.Chessboard;
+import model.ChessboardPoint;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import static model.Constant.CHESSBOARD_COL_SIZE;
@@ -152,75 +153,14 @@ public class ChessboardComponent extends JComponent {
         //IF THIS EQUALS PUT CHESS INTO THE CELL???????????????????????
     }
 
-    public ElephantChessComponent removeChessComponentAtGrid1(ChessboardPoint point) {
-        // Note re-validation is required after remove / removeAll.
-        ElephantChessComponent chess = (ElephantChessComponent) getGridComponentAt(point).getComponents()[0];//GETCOMPONENT MEANS GET THE CHESS IN IT?WHY BOTHER USE[0]????????????
+    public ChessComponent removeChessComponentAtGrid(ChessboardPoint point) {
+        ChessComponent chess = (ChessComponent) getGridComponentAt(point).getComponents()[0];
         getGridComponentAt(point).removeAll();
-        //WHY NEED REVALIDATE?SOUNDS LIKE IT CONCEALED  THE BOX
-        getGridComponentAt(point).revalidate();
-        chess.setSelected(false);
-        return chess;
-    }
-    public MouseChessComponent removeChessComponentAtGrid2(ChessboardPoint point) {
-        // Note re-validation is required after remove / removeAll.
-        MouseChessComponent chess = (MouseChessComponent) getGridComponentAt(point).getComponents()[0];//GETCOMPONENT MEANS GET THE CHESS IN IT?WHY BOTHER USE[0]????????????
-        getGridComponentAt(point).removeAll();
-        //WHY NEED REVALIDATE?SOUNDS LIKE IT CONCEALED  THE BOX
-        getGridComponentAt(point).revalidate();
-        chess.setSelected(false);
-        return chess;
-    }public CatChessComponent removeChessComponentAtGrid3(ChessboardPoint point) {
-        // Note re-validation is required after remove / removeAll.
-        CatChessComponent chess = (CatChessComponent) getGridComponentAt(point).getComponents()[0];//GETCOMPONENT MEANS GET THE CHESS IN IT?WHY BOTHER USE[0]????????????
-        getGridComponentAt(point).removeAll();
-        //WHY NEED REVALIDATE?SOUNDS LIKE IT CONCEALED  THE BOX
-        getGridComponentAt(point).revalidate();
-        chess.setSelected(false);
-        return chess;
-    }public DogChessComponent removeChessComponentAtGrid4(ChessboardPoint point) {
-        // Note re-validation is required after remove / removeAll.
-        DogChessComponent chess = (DogChessComponent) getGridComponentAt(point).getComponents()[0];//GETCOMPONENT MEANS GET THE CHESS IN IT?WHY BOTHER USE[0]????????????
-        getGridComponentAt(point).removeAll();
-        //WHY NEED REVALIDATE?SOUNDS LIKE IT CONCEALED  THE BOX
-        getGridComponentAt(point).revalidate();
-        chess.setSelected(false);
-        return chess;
-    }public WolfChessComponent removeChessComponentAtGrid5(ChessboardPoint point) {
-        // Note re-validation is required after remove / removeAll.
-        WolfChessComponent chess = (WolfChessComponent) getGridComponentAt(point).getComponents()[0];//GETCOMPONENT MEANS GET THE CHESS IN IT?WHY BOTHER USE[0]????????????
-        getGridComponentAt(point).removeAll();
-        //WHY NEED REVALIDATE?SOUNDS LIKE IT CONCEALED  THE BOX
-        getGridComponentAt(point).revalidate();
-        chess.setSelected(false);
-        return chess;
-    }public LeopardChessComponent removeChessComponentAtGrid6(ChessboardPoint point) {
-        // Note re-validation is required after remove / removeAll.
-        LeopardChessComponent chess = (LeopardChessComponent) getGridComponentAt(point).getComponents()[0];//GETCOMPONENT MEANS GET THE CHESS IN IT?WHY BOTHER USE[0]????????????
-        getGridComponentAt(point).removeAll();
-        //WHY NEED REVALIDATE?SOUNDS LIKE IT CONCEALED  THE BOX
-        getGridComponentAt(point).revalidate();
-        chess.setSelected(false);
-        return chess;
-    }public TigerChessComponent removeChessComponentAtGrid7(ChessboardPoint point) {
-        // Note re-validation is required after remove / removeAll.
-        TigerChessComponent chess = (TigerChessComponent) getGridComponentAt(point).getComponents()[0];//GETCOMPONENT MEANS GET THE CHESS IN IT?WHY BOTHER USE[0]????????????
-        getGridComponentAt(point).removeAll();
-        //WHY NEED REVALIDATE?SOUNDS LIKE IT CONCEALED  THE BOX
-        getGridComponentAt(point).revalidate();
-        chess.setSelected(false);
-        return chess;
-    }public LionChessComponent removeChessComponentAtGrid8(ChessboardPoint point) {
-        // Note re-validation is required after remove / removeAll.
-        LionChessComponent chess = (LionChessComponent) getGridComponentAt(point).getComponents()[0];//GETCOMPONENT MEANS GET THE CHESS IN IT?WHY BOTHER USE[0]????????????
-        getGridComponentAt(point).removeAll();
-        //WHY NEED REVALIDATE?SOUNDS LIKE IT CONCEALED  THE BOX
         getGridComponentAt(point).revalidate();
         chess.setSelected(false);
         return chess;
     }
 
-    //GRID'S COMPONENT IS CELL,GRID IS A MAP
-    //I CHANGED THE PRIVATE INTO PUBLIC
     public CellComponent getGridComponentAt(ChessboardPoint point) {
         return gridComponents[point.getRow()][point.getCol()];
     }
@@ -251,22 +191,8 @@ public class ChessboardComponent extends JComponent {
                 gameController.onPlayerClickCell(getChessboardPoint(e.getPoint()), (CellComponent) clickedComponent);
             } else {
                 System.out.print("One chess here and ");
-                if(clickedComponent.getComponents()[0] instanceof ElephantChessComponent){
-                    gameController.onPlayerClickChessPiece1(getChessboardPoint(e.getPoint()), (ElephantChessComponent) clickedComponent.getComponents()[0]);
-                }else if(clickedComponent.getComponents()[0] instanceof LionChessComponent){
-                    gameController.onPlayerClickChessPiece2(getChessboardPoint(e.getPoint()), (LionChessComponent) clickedComponent.getComponents()[0]);
-                }else if(clickedComponent.getComponents()[0] instanceof TigerChessComponent){
-                    gameController.onPlayerClickChessPiece3(getChessboardPoint(e.getPoint()), (TigerChessComponent) clickedComponent.getComponents()[0]);
-                }else if(clickedComponent.getComponents()[0] instanceof LeopardChessComponent){
-                    gameController.onPlayerClickChessPiece4(getChessboardPoint(e.getPoint()), (LeopardChessComponent) clickedComponent.getComponents()[0]);
-                }else if(clickedComponent.getComponents()[0] instanceof WolfChessComponent){
-                    gameController.onPlayerClickChessPiece5(getChessboardPoint(e.getPoint()), (WolfChessComponent) clickedComponent.getComponents()[0]);
-                }else if(clickedComponent.getComponents()[0] instanceof DogChessComponent){
-                    gameController.onPlayerClickChessPiece6(getChessboardPoint(e.getPoint()), (DogChessComponent) clickedComponent.getComponents()[0]);
-                }else if(clickedComponent.getComponents()[0] instanceof CatChessComponent){
-                    gameController.onPlayerClickChessPiece7(getChessboardPoint(e.getPoint()), (CatChessComponent) clickedComponent.getComponents()[0]);
-                }else if(clickedComponent.getComponents()[0] instanceof MouseChessComponent){
-                    gameController.onPlayerClickChessPiece8(getChessboardPoint(e.getPoint()), (MouseChessComponent) clickedComponent.getComponents()[0]);
+                if(clickedComponent.getComponents()[0] instanceof ChessComponent){
+                    gameController.onPlayerClickChessPiece(getChessboardPoint(e.getPoint()), (ChessComponent) clickedComponent.getComponents()[0]);
                 }
             }
         }

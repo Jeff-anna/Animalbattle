@@ -6,17 +6,7 @@ import model.Constant;
 import model.PlayerColor;
 import model.Chessboard;
 import model.ChessboardPoint;
-import view.CellComponent;
-import view.ElephantChessComponent;
-import view.LionChessComponent;
-import view.TigerChessComponent;
-import view.LeopardChessComponent;
-import view.WolfChessComponent;
-import view.DogChessComponent;
-import view.CatChessComponent;
-import view.MouseChessComponent;
-
-import view.ChessboardComponent;
+import view.*;
 import view.ChessGameFrame;
 
 /**
@@ -28,6 +18,7 @@ import view.ChessGameFrame;
 */
 public class GameController implements GameListener {
 
+
     private Chessboard model;
     private ChessboardComponent view;
     private PlayerColor currentPlayer;
@@ -35,6 +26,7 @@ public class GameController implements GameListener {
     // Record whether there is a selected piece before
     private ChessboardPoint selectedPoint;
     private int turn=1;
+
 
     public GameController(ChessboardComponent view, Chessboard model) {
         this.view = view;
@@ -58,9 +50,7 @@ public class GameController implements GameListener {
 
     // after a valid move swap the player
     private void swapColor() {
-
         currentPlayer = currentPlayer == PlayerColor.BLUE ? PlayerColor.RED : PlayerColor.BLUE;
-
     }
 
     private boolean win() {
@@ -69,29 +59,39 @@ public class GameController implements GameListener {
     }
 
 
-
     // click an empty cell
     @Override
     public void onPlayerClickCell(ChessboardPoint point, CellComponent component) {
         if (selectedPoint != null && model.isValidMove(selectedPoint, point)) {
             model.moveChessPiece(selectedPoint, point);
-            if(view.getGridComponentAt(selectedPoint).getComponent(0) instanceof ElephantChessComponent) {
-                view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid1(selectedPoint));
-            }else if(view.getGridComponentAt(selectedPoint).getComponent(0) instanceof LionChessComponent) {
-                view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid8(selectedPoint));
-            }else if(view.getGridComponentAt(selectedPoint).getComponent(0) instanceof TigerChessComponent) {
-                view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid7(selectedPoint));
-            }else if(view.getGridComponentAt(selectedPoint).getComponent(0) instanceof LeopardChessComponent) {
-                view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid6(selectedPoint));
-            }else if(view.getGridComponentAt(selectedPoint).getComponent(0) instanceof WolfChessComponent) {
-                view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid5(selectedPoint));
-            }else if(view.getGridComponentAt(selectedPoint).getComponent(0) instanceof DogChessComponent) {
-                view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid4(selectedPoint));
-            }else if(view.getGridComponentAt(selectedPoint).getComponent(0) instanceof CatChessComponent) {
-                view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid3(selectedPoint));
-            }else if(view.getGridComponentAt(selectedPoint).getComponent(0) instanceof MouseChessComponent) {
-                view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid2(selectedPoint));
+            if(view.getGridComponentAt(selectedPoint).getComponent(0) instanceof ChessComponent) {
+                view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid(selectedPoint));
             }
+            selectedPoint = null;
+            swapColor();
+            view.repaint();
+            // TODO: if the chess enter Dens or Traps and so on
+        }
+    }
+
+    // click a cell with a chess
+    @Override
+    public void onPlayerClickChessPiece(ChessboardPoint point, ChessComponent component) {
+        if (selectedPoint == null) {
+            if (model.getChessPieceOwner(point).equals(currentPlayer)) {
+                selectedPoint = point;
+                component.setSelected(true);
+                component.repaint();
+            }
+        } else if (selectedPoint.equals(point)) {
+            selectedPoint = null;
+            component.setSelected(false);
+            component.repaint();
+        }
+        else if(model.isValidCapture(selectedPoint, point)){
+            model.captureChessPiece(selectedPoint, point);
+            view.removeChessComponentAtGrid(point);
+            view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid(selectedPoint));
             selectedPoint = null;
             swapColor();
             view.repaint();
@@ -102,121 +102,8 @@ public class GameController implements GameListener {
             }else{
                 ChessGameFrame.getPlayerlabel().setText(String.format("Player: Red"));
             }
-            // TODO: if the chess enter Dens or Traps and so on
         }
     }
-
-    // click a cell with a chess
-    @Override
-    public void onPlayerClickChessPiece1(ChessboardPoint point, ElephantChessComponent component) {
-        if (selectedPoint == null) {
-            if (model.getChessPieceOwner(point).equals(currentPlayer)) {
-                selectedPoint = point;
-                component.setSelected(true);
-                component.repaint();
-            }
-        } else if (selectedPoint.equals(point)) {
-            selectedPoint = null;
-            component.setSelected(false);
-            component.repaint();
-        }
-        // TODO: Implement capture function
-    }
-    public void onPlayerClickChessPiece2(ChessboardPoint point, LionChessComponent component) {
-        if (selectedPoint == null) {
-            if (model.getChessPieceOwner(point).equals(currentPlayer)) {
-                selectedPoint = point;
-                component.setSelected(true);
-                component.repaint();
-            }
-        } else if (selectedPoint.equals(point)) {
-            selectedPoint = null;
-            component.setSelected(false);
-            component.repaint();
-        }
-        // TODO: Implement capture function
-    }
-    public void onPlayerClickChessPiece3(ChessboardPoint point, TigerChessComponent component) {
-        if (selectedPoint == null) {
-            if (model.getChessPieceOwner(point).equals(currentPlayer)) {
-                selectedPoint = point;
-                component.setSelected(true);
-                component.repaint();
-            }
-        } else if (selectedPoint.equals(point)) {
-            selectedPoint = null;
-            component.setSelected(false);
-            component.repaint();
-        }
-        // TODO: Implement capture function
-    }public void onPlayerClickChessPiece4(ChessboardPoint point, LeopardChessComponent component) {
-        if (selectedPoint == null) {
-            if (model.getChessPieceOwner(point).equals(currentPlayer)) {
-                selectedPoint = point;
-                component.setSelected(true);
-                component.repaint();
-            }
-        } else if (selectedPoint.equals(point)) {
-            selectedPoint = null;
-            component.setSelected(false);
-            component.repaint();
-        }
-        // TODO: Implement capture function
-    }public void onPlayerClickChessPiece5(ChessboardPoint point, WolfChessComponent component) {
-        if (selectedPoint == null) {
-            if (model.getChessPieceOwner(point).equals(currentPlayer)) {
-                selectedPoint = point;
-                component.setSelected(true);
-                component.repaint();
-            }
-        } else if (selectedPoint.equals(point)) {
-            selectedPoint = null;
-            component.setSelected(false);
-            component.repaint();
-        }
-        // TODO: Implement capture function
-    }public void onPlayerClickChessPiece6(ChessboardPoint point, DogChessComponent component) {
-        if (selectedPoint == null) {
-            if (model.getChessPieceOwner(point).equals(currentPlayer)) {
-                selectedPoint = point;
-                component.setSelected(true);
-                component.repaint();
-            }
-        } else if (selectedPoint.equals(point)) {
-            selectedPoint = null;
-            component.setSelected(false);
-            component.repaint();
-        }
-        // TODO: Implement capture function
-    }public void onPlayerClickChessPiece7(ChessboardPoint point, CatChessComponent component) {
-        if (selectedPoint == null) {
-            if (model.getChessPieceOwner(point).equals(currentPlayer)) {
-                selectedPoint = point;
-                component.setSelected(true);
-                component.repaint();
-            }
-        } else if (selectedPoint.equals(point)) {
-            selectedPoint = null;
-            component.setSelected(false);
-            component.repaint();
-        }
-        // TODO: Implement capture function
-    }
-    public void onPlayerClickChessPiece8(ChessboardPoint point, MouseChessComponent component) {
-        if (selectedPoint == null) {
-            if (model.getChessPieceOwner(point).equals(currentPlayer)) {
-                selectedPoint = point;
-                component.setSelected(true);
-                component.repaint();
-            }
-        } else if (selectedPoint.equals(point)) {
-            selectedPoint = null;
-            component.setSelected(false);
-            component.repaint();
-        }
-        // TODO: Implement capture function
-    }
-
     public int getTurn() {
         return turn;
     }
