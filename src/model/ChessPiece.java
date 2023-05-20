@@ -15,16 +15,15 @@ public class ChessPiece {
         this.rank = rank;
     }
 
-    public boolean canCapture(ChessPiece target) {
-        // TODO: Finish this method!
-        return false;
-    }
-
     public String getName() {
         return name;
     }
 
     public PlayerColor getOwner() {
         return owner;
+    }
+
+    public int getRank() {
+        return rank;
     }
 }
