@@ -42,6 +42,7 @@ public class ChessComponent extends JComponent {
         if (isSelected()) { // Highlights the model if selected.
             g.setColor(Color.RED);
             g.drawOval(0, 0, getWidth() , getHeight());
+
         }
     }
 }

@@ -29,6 +29,8 @@ public class ChessGameFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); //设置程序关闭按键，如果点击右上方的叉就游戏全部关闭了
         setLayout(null);
         addChessboard();
+
+
         turnlabel.setText("Turn: 1");
         turnlabel.setLocation(HEIGTH, HEIGTH / 6);
         turnlabel.setSize(200, 60);
@@ -41,6 +43,9 @@ public class ChessGameFrame extends JFrame {
         add(playerlabel);
         addTeamLabel();
         addRuleButton();
+        addLoadButton();
+       // addRestartButton();
+        addChangeColorButton();
     }
 
     public ChessboardComponent getChessboardComponent() {
@@ -98,7 +103,37 @@ public class ChessGameFrame extends JFrame {
         button.addActionListener(e -> {
             System.out.println("Click load");
             String path = JOptionPane.showInputDialog(this,"Input Path here");
-            // gameController.loadGameFromFile(path);
+            GameController.loadGameFromFile(path);
+        });
+    }
+    private void addRestartButton() {
+        JButton button = new JButton("Restart");
+        button.setLocation(HEIGTH, HEIGTH / 10 + 360);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+        button.addActionListener(e -> {
+            //不能用注册了的gamecontroller来用，为什么？
+           // gameController.reset();
+        });
+    }
+    private void addChangeColorButton() {
+        JButton button = new JButton("Change Color");
+        button.setLocation(HEIGHT+793, HEIGHT / 10+600 );
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+
+        button.addActionListener(e -> {
+            System.out.println("Click change Color");
+            Object[] options = {"Grass", "River", "Trap", "Home"};
+            String name = (String) JOptionPane.showInputDialog(null, "Which to change?",
+                    "Change Color", JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            if (name == null){
+            }else{
+                ColorFrame colorFrame = new ColorFrame(name);
+                colorFrame.gameFrame = this;
+            }
         });
     }
     public static JLabel getTurnlabel() {

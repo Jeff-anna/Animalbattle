@@ -1,4 +1,5 @@
 package model;
+import view.ChessboardComponent;
 
 /**
  * This class represents positions on the checkerboard, such as (0, 0), (0, 7), and so on
@@ -40,4 +41,5 @@ public class ChessboardPoint {
     public String toString() {
         return "("+row + ","+col+") " + "on the chessboard is clicked!";
     }
+
 }

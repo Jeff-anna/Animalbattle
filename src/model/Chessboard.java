@@ -15,7 +15,7 @@ public class Chessboard {
         initPieces();
     }
 
-    private void initGrid() {
+    public void initGrid() {
         for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
                 grid[i][j] = new Cell();
@@ -23,7 +23,7 @@ public class Chessboard {
         }
     }
     //MORE NEW CHESS NEEDED
-    private void initPieces() {
+    public void initPieces() {
         grid[2][6].setPiece(new ChessPiece(PlayerColor.BLUE, "Elephant",8));
         grid[6][0].setPiece(new ChessPiece(PlayerColor.RED, "Elephant",8));
         grid[0][0].setPiece(new ChessPiece(PlayerColor.BLUE, "Lion",7));
@@ -53,11 +53,11 @@ public class Chessboard {
 
     }
 
-    private ChessPiece getChessPieceAt(ChessboardPoint point) {
+    private  ChessPiece getChessPieceAt(ChessboardPoint point) {
         return getGridAt(point).getPiece();
     }
 
-    private Cell getGridAt(ChessboardPoint point) {
+    private  Cell getGridAt(ChessboardPoint point) {
         return grid[point.getRow()][point.getCol()];
     }
 
@@ -131,6 +131,12 @@ public class Chessboard {
     public boolean isOnLand(ChessboardPoint src){
         if(src.getCol() >= 3 && src.getCol() <= 5) {
             return src.getRow() != 1 && src.getRow() != 2 && src.getRow() != 4 && src.getRow() != 5;
+        }
+        return true;
+    }
+    public boolean isMovable(ChessboardPoint point){
+        if(getChessPieceAt(point)!=null){
+            return false;
         }
         return true;
     }
