@@ -15,7 +15,7 @@ import java.awt.geom.RoundRectangle2D;
 public class CellComponent extends JPanel {
     public Color background;
     int size;
-    public boolean canStep;//由controller里面的方法设定
+    public boolean availableStep;//由controller里面的方法设定
     public boolean mouseAt;//同boardview里方法设定
     public CellType type;
 
@@ -39,7 +39,7 @@ public class CellComponent extends JPanel {
         else g.setColor(background);
         g.fillRect(1, 1, this.getWidth() - 1, this.getHeight() - 1);
 
-        if (canStep) { // Highlights the model if selected.
+        if (availableStep) { // Highlights the model if selected.
             Graphics2D g2d = (Graphics2D) g;
             g2d.setColor(new Color(255, 253, 87, 150));
             RoundRectangle2D roundedRectangle = new RoundRectangle2D.Double(1, 1,

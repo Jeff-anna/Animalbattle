@@ -7,14 +7,16 @@ import java.awt.*;
  * but this class only cares how to draw Chess on ChessboardComponent
  */
 public class ChessComponent extends JComponent {
-    private PlayerColor owner;
+    public PlayerColor owner;
     private int rank;
+    int size;
     private final String[] names = {"鼠","猫","狗","狼","豹","虎","狮","象"};
     private boolean selected;
     public ChessComponent(PlayerColor owner,int rank, int size) {
         this.owner = owner;
         this.rank = rank;
         this.selected = false;
+        this.size=size;
         setSize(size/2, size/2);
         setLocation(0,0);
         setVisible(true);

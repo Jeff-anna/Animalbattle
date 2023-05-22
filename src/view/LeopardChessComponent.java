@@ -15,6 +15,8 @@ public class LeopardChessComponent extends ChessComponent {
 
     public LeopardChessComponent(PlayerColor owner, int size) {
         super(owner,5, size);
+        this.owner=owner;
+        this.size=size;
         this.selected = false;
     }
 
@@ -28,6 +30,21 @@ public class LeopardChessComponent extends ChessComponent {
 
     public void setSelected(boolean selected) {
         this.selected = selected;
+    }
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        ImageIcon pic = new ImageIcon("resource\\chesspicture\\redleopard.jpg");
+        if (owner == PlayerColor.BLUE){
+            pic = new ImageIcon("resource\\chesspicture\\blueleopard.jpg");
+        }
+        Image image = pic.getImage();
+        pic = new ImageIcon(image.getScaledInstance(size, size,Image.SCALE_SMOOTH));
+        JLabel label = new JLabel(pic);
+        label.setSize(size, size);
+        //bgLabel.setLocation(0, 0);
+        add(label);
     }
 
 }
