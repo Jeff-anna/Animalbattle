@@ -102,6 +102,9 @@ public class Chessboard {
         if (getChessPieceAt(src) == null || getChessPieceAt(dest) != null) {
             return false;
         }
+        if (isValidToJump(src, dest)) {
+            return true;
+        }
         if (!isOnLand(dest)) {
             if (isMovableToRiver(src)) {
                 return calculateDistance(src, dest) == 1;
@@ -112,36 +115,41 @@ public class Chessboard {
 
 
     public boolean isValidCapture(ChessboardPoint src, ChessboardPoint dest) {
-        if (getChessPieceAt(dest).getRank() == 0) {
-            return true;
-        }
-        if (!getChessPieceOwner(src).equals(getChessPieceOwner(dest)) && isValidToJump(src, dest)){
-            if (getChessPieceAt(src).getRank() == 6 || getChessPieceAt(src).getRank() == 7) {
-                return getChessPieceAt(src).getRank() >= getChessPieceAt(dest).getRank();
+        if ((isOnLand(src) && isOnLand(dest)) || (!isOnLand(src) && !isOnLand(dest))) {
+            if (isValidToHome(src, dest)) {
+                return true;
             }
-        }
-        if (!getChessPieceOwner(src).equals(getChessPieceOwner(dest)) && calculateDistance(src, dest) == 1) {
-            if (isOnLand(src) && getChessPieceAt(src).getRank() != 1 && getChessPieceAt(dest).getRank() != 1) {
-                return getChessPieceAt(src).getRank() >= getChessPieceAt(dest).getRank();
-            }else if (isOnLand(src)) {
+            else if (isValidCapture67(src, dest) && !isValidToHome(src, dest)) {
+                return true;
+            }
+            else if ((calculateDistance(src, dest) == 1) && ((getChessPieceOwner(src) != getChessPieceOwner(dest)) || getChessPieceAt(dest).getRank() == 0)) {
                 if (getChessPieceAt(src).getRank() == 1 && getChessPieceAt(dest).getRank() == 8) {
                     return true;
                 }
-                if (getChessPieceAt(src).getRank() != 8 && getChessPieceAt(src).getRank() >= getChessPieceAt(dest).getRank()) {
-                    return true;
-                }
-                if (getChessPieceAt(src).getRank() == 8 && getChessPieceAt(dest).getRank() == 1) {
+                else if (getChessPieceAt(src).getRank() == 8 && getChessPieceAt(dest).getRank() == 1) {
                     return false;
                 }
-            }else if (!isOnLand(src)) {
-                return !isOnLand(dest);
+                else return getChessPieceAt(src).getRank() >= getChessPieceAt(dest).getRank();
             }
-            return false;
         }
         return false;
     }
 
-    public boolean isOnLand(ChessboardPoint src){
+    public boolean isValidCapture67(ChessboardPoint src, ChessboardPoint dest) {
+        if (getChessPieceAt(src).getRank() == 6 || getChessPieceAt(src).getRank() == 7) {
+            if (getChessPieceAt(src).getRank() >= getChessPieceAt(dest).getRank()) {
+                return (isValidToJump(src, dest) || calculateDistance(src, dest) == 1);
+            }
+        }return false;
+    }
+    public boolean isValidToHome(ChessboardPoint src, ChessboardPoint dest) {
+        if (getChessPieceAt(dest).getRank() == -1) {
+            return calculateDistance(src, dest) == 1 && getChessPieceOwner(src) != getChessPieceOwner(dest);
+        }
+        return false;
+    }
+
+        public boolean isOnLand(ChessboardPoint src){
         if(src.getRow() >= 3 && src.getRow() <= 5) {
             return src.getCol() != 1 && src.getCol() != 2 && src.getCol() != 4 && src.getCol() != 5;
         }
@@ -152,7 +160,9 @@ public class Chessboard {
     }
     public boolean isValidToJump(ChessboardPoint src, ChessboardPoint des){
         if (getChessPieceAt(src).getRank() == 6 || getChessPieceAt(src).getRank() == 7){
-            return isOnLand(des);
+            if (calculateDistance(src, des) == 3 || calculateDistance(src, des) == 4){
+                return isOnLand(des);
+            }
         }
         return false;
     }
