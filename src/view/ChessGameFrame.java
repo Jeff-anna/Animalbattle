@@ -44,7 +44,7 @@ public class ChessGameFrame extends JFrame {
         addTeamLabel();
         addRuleButton();
         addLoadButton();
-       // addRestartButton();
+        addRestartButton();
         addChangeColorButton();
     }
 
@@ -60,7 +60,7 @@ public class ChessGameFrame extends JFrame {
      * 在游戏面板中添加棋盘
      */
     private void addChessboard() {
-        chessboardComponent = new ChessboardComponent(ONE_CHESS_SIZE);
+        chessboardComponent = new ChessboardComponent(ONE_CHESS_SIZE,turnlabel,playerlabel);
         chessboardComponent.setLocation(HEIGTH /5, HEIGTH / 10);
         add(chessboardComponent);
     }
@@ -113,8 +113,7 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
         button.addActionListener(e -> {
-            //不能用注册了的gamecontroller来用，为什么？
-           // gameController.reset();
+           chessboardComponent.getGameController().reset();
         });
     }
     private void addChangeColorButton() {

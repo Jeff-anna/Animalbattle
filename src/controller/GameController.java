@@ -90,7 +90,9 @@ public class GameController implements GameListener {
                 component.setSelected(true);
                 component.revalidate();
                 component.repaint();
-                view.showAvailableCell(point);
+                view.repaint();
+                view.revalidate();
+               // view.showAvailableCell(point);
             }
         } else if (selectedPoint.equals(point)) {
             selectedPoint = null;
@@ -99,7 +101,7 @@ public class GameController implements GameListener {
             component.revalidate();
             view.repaint();
             view.revalidate();
-            view.removeAvailableCell();
+            //view.removeAvailableCell();
         }
         else if(model.isValidCapture(selectedPoint, point)){
             model.captureChessPiece(selectedPoint, point);
@@ -123,11 +125,14 @@ public class GameController implements GameListener {
 
     }
     public void reset(){
-        model.initPieces();
         model.initGrid();
+        model.initPieces();
         view.removeChessComponent();
         view.initiateChessComponent(model);
         currentPlayer=PlayerColor.BLUE;
+        view.turnlable.setText("Turn: 1");
+        view.playerlable.setText("player: Blue");
+        turn=1;
         selectedPoint=null;
         view.repaint();
         view.revalidate();
