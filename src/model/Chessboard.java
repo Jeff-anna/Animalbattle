@@ -105,7 +105,7 @@ public class Chessboard {
         if (!isOnLand(dest)) {
             if (isMovableToRiver(src)) {
                 return calculateDistance(src, dest) == 1;
-            }else return false;
+            } else return false;
         }
         return calculateDistance(src, dest) == 1;
     }

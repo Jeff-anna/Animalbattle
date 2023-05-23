@@ -10,7 +10,7 @@ import java.awt.*;
  * This is the equivalent of the ChessPiece class,
  * but this class only cares how to draw Chess on ChessboardComponent
  */
-public class HomeChessComponent extends JComponent {
+public class HomeChessComponent extends ChessComponent {
     private PlayerColor owner;
     //USE GETRANK TO GET RANK TO JUDGE IF THE CHESS CAN EAT ANOTHER
     private final int rank=0;
@@ -18,11 +18,10 @@ public class HomeChessComponent extends JComponent {
     private boolean selected;
 
     public HomeChessComponent(PlayerColor owner, int size) {
-        this.owner = owner;
+        super(owner,0,size);
+        this.owner=owner;
+        this.size=size;
         this.selected = false;
-        setSize(size/2, size/2);
-        setLocation(0,0);
-        setVisible(true);
     }
 
     public boolean isSelected() {
