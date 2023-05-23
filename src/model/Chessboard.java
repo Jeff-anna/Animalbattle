@@ -112,6 +112,9 @@ public class Chessboard {
 
 
     public boolean isValidCapture(ChessboardPoint src, ChessboardPoint dest) {
+        if (getChessPieceAt(dest).getRank() == 0) {
+            return true;
+        }
         if (!getChessPieceOwner(src).equals(getChessPieceOwner(dest)) && isValidToJump(src, dest)){
             if (getChessPieceAt(src).getRank() == 6 || getChessPieceAt(src).getRank() == 7) {
                 return getChessPieceAt(src).getRank() >= getChessPieceAt(dest).getRank();
