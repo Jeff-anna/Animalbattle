@@ -19,8 +19,8 @@ import static model.Constant.CHESSBOARD_ROW_SIZE;
 public class ChessboardComponent extends JComponent {
     public static final Color springGrass = new Color(86, 200, 73);
     public static final Color springRiver = new Color(161, 227, 255);
-    public static final Color autumnGrass = new Color(199, 203, 113);
-    public static final Color autumnRiver = new Color(115, 195, 186);
+    public static final Color lavaGrass = new Color(233, 103, 113);
+    public static final Color lavaRiver = new Color(255, 165, 0);
 
     public static final Color trapColor = new Color(189, 166, 164);
     public static final Color denColor = new Color(198, 200, 178);
@@ -242,6 +242,24 @@ public class ChessboardComponent extends JComponent {
         super.paintComponent(g);
         //NO NEED TO KNOW
         ((Graphics2D) g).setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    }
+    public void changeTheme(boolean isSpring){
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (gridComponents[i][j].type == CellType.SPRING_GRASS) gridComponents[i][j].type = CellType.AUTUMN_GRASS;
+                else if (gridComponents[i][j].type == CellType.SPRING_RIVER) gridComponents[i][j].type = CellType.AUTUMN_RIVER;
+                else if (gridComponents[i][j].type == CellType.AUTUMN_GRASS) gridComponents[i][j].type = CellType.SPRING_GRASS;
+                else if (gridComponents[i][j].type == CellType.AUTUMN_RIVER) gridComponents[i][j].type = CellType.SPRING_RIVER;
+                else if (gridComponents[i][j].type == CellType.OTHER_GRASS && isSpring) gridComponents[i][j].type = CellType.AUTUMN_GRASS;
+                else if (gridComponents[i][j].type == CellType.OTHER_RIVER && isSpring) gridComponents[i][j].type = CellType.AUTUMN_RIVER;
+                else if (gridComponents[i][j].type == CellType.OTHER_GRASS && !isSpring) gridComponents[i][j].type = CellType.SPRING_GRASS;
+                else if (gridComponents[i][j].type == CellType.OTHER_RIVER && !isSpring) gridComponents[i][j].type = CellType.SPRING_RIVER;
+                else if (gridComponents[i][j].type == CellType.OTHER_TRAP) gridComponents[i][j].type = CellType.TRAP;
+                else if (gridComponents[i][j].type == CellType.OTHER_DEN) gridComponents[i][j].type = CellType.DEN;
+            }
+        }
+        repaint();
+        revalidate();
     }
 
     @Override

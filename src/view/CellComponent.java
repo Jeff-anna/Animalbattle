@@ -32,8 +32,8 @@ public class CellComponent extends JPanel {
         super.paintComponents(g);
         if (type == CellType.SPRING_GRASS) g.setColor(ChessboardComponent.springGrass);
         else if (type == CellType.SPRING_RIVER) g.setColor(ChessboardComponent.springRiver);
-        else if (type == CellType.AUTUMN_GRASS) g.setColor(ChessboardComponent.autumnGrass);
-        else if (type == CellType.AUTUMN_RIVER) g.setColor(ChessboardComponent.autumnRiver);
+        else if (type == CellType.AUTUMN_GRASS) g.setColor(ChessboardComponent.lavaGrass);
+        else if (type == CellType.AUTUMN_RIVER) g.setColor(ChessboardComponent.lavaRiver);
         else if (type == CellType.TRAP) g.setColor(ChessboardComponent.trapColor);
         else if (type == CellType.DEN) g.setColor(ChessboardComponent.denColor);
         else g.setColor(background);
