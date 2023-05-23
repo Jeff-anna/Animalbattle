@@ -141,6 +141,12 @@ public class Chessboard {
     public boolean isMovableToRiver(ChessboardPoint src){
         return getChessPieceAt(src).getRank() == 1;
     }
+    public boolean isValidToJump(ChessboardPoint src, ChessboardPoint des){
+        if (getChessPieceAt(src).getRank() == 6 || getChessPieceAt(src).getRank() == 7){
+            return isOnLand(des);
+        }
+        return false;
+    }
     public boolean isMovable(ChessboardPoint point){
         if(getChessPieceAt(point)!=null){
             return false;
