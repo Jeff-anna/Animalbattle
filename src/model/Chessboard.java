@@ -85,7 +85,6 @@ public class Chessboard {
         if (!isValidCapture(src, dest)) {
             throw new IllegalArgumentException("Illegal chess capture!");
         }
-        // TODO: Finish the method.
         if (isValidCapture(src, dest)) {
             removeChessPiece(dest);
             moveChessPiece(src, dest);
