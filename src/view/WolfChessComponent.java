@@ -37,7 +37,7 @@ public class WolfChessComponent extends ChessComponent {
 
         ImageIcon pic = new ImageIcon("resource\\chesspicture\\redwolf.jpg");
         if (owner == PlayerColor.BLUE){
-            pic = new ImageIcon("resource\\chesspicture\\bluewlof.jpg");
+            pic = new ImageIcon("resource\\chesspicture\\bluewolf.jpg");
         }
         Image image = pic.getImage();
         pic = new ImageIcon(image.getScaledInstance(size, size,Image.SCALE_SMOOTH));

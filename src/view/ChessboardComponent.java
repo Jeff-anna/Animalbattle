@@ -31,10 +31,13 @@ public class ChessboardComponent extends JComponent {
     private final Set<ChessboardPoint> homeCell = new HashSet<>();
     private static final Set<ChessboardPoint> availableCell = new HashSet<>();
 
-    private GameController gameController;
-
-    public ChessboardComponent(int chessSize) {
-        CHESS_SIZE = chessSize;
+    private  GameController gameController;
+    public JLabel turnlable;
+    public JLabel playerlable;
+    public ChessboardComponent(int chessSize,JLabel turnlable,JLabel playerlable) {
+        this.CHESS_SIZE = chessSize;
+        this.turnlable=turnlable;
+        this.playerlable=playerlable;
         int width = CHESS_SIZE * 7;
         int height = CHESS_SIZE * 9;
         enableEvents(AWTEvent.MOUSE_EVENT_MASK);// Allow mouse events to occur
@@ -200,6 +203,10 @@ public class ChessboardComponent extends JComponent {
     }
     public void registerController(GameController gameController) {
         this.gameController = gameController;
+    }
+
+    public GameController getGameController() {
+        return gameController;
     }
 
     public void setChessComponentAtGrid(ChessboardPoint point, JComponent chess) {
