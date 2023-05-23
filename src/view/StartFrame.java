@@ -2,6 +2,7 @@ package view;
 
 import controller.GameController;
 import model.Chessboard;
+import view.ChessGameFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +12,7 @@ public class StartFrame extends JFrame{
     private final int HEIGTH;
 
     private final int ONE_CHESS_SIZE;
-
+    private ChessGameFrame gameFrame;
     private ChessboardComponent chessboardComponent;
     private GameController gameController;
     public StartFrame(int width, int height) {
@@ -54,6 +55,8 @@ public class StartFrame extends JFrame{
             ChessGameFrame mainFrame = new ChessGameFrame(1100, 800);
             GameController gameController = new GameController(mainFrame.getChessboardComponent(), new Chessboard());
             mainFrame.setVisible(true);
+            this.gameFrame=mainFrame;
+            gameFrame.startFrame=this;
         });
         button.setSize(240,80);
         button.setLocation(200,300);

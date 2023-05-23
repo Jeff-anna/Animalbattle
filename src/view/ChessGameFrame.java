@@ -6,6 +6,7 @@ import model.ChessboardPoint;
 import model.Chessboard;
 import javax.swing.*;
 import java.awt.*;
+import view.StartFrame;
 
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
@@ -22,6 +23,7 @@ public class ChessGameFrame extends JFrame {
     private ChessboardComponent chessboardComponent;
     private GameController gameController;
     JLabel background;
+    public StartFrame startFrame;
     public final JLabel originBG;
     public final JLabel lavaBG;
 
@@ -58,6 +60,7 @@ public class ChessGameFrame extends JFrame {
         addRestartButton();
         addChangeColorButton();
         addChangeThemeButton();
+        addBackButton();
 
         Image image = new ImageIcon("resource/background/origin.jpg").getImage();
         image = image.getScaledInstance(1100, 810,Image.SCALE_DEFAULT);
@@ -139,6 +142,20 @@ public class ChessGameFrame extends JFrame {
             revalidate();
         });
     }
+    private void addBackButton() {
+        JButton button = new JButton("Back");
+        button.setLocation(HEIGHT+793, HEIGHT / 10 +350);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+
+        button.addActionListener(e -> {
+            System.out.println("Click back");
+            this.setVisible(false);
+            startFrame.setVisible(true);
+        });
+    }
+
 
     private void addLoadButton() {
         JButton button = new JButton("Load");
