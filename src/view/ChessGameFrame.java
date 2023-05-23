@@ -17,6 +17,7 @@ public class ChessGameFrame extends JFrame {
     private final int ONE_CHESS_SIZE;
     public static JLabel turnlabel=new JLabel();
     public static JLabel playerlabel=new JLabel();
+    public static JLabel selectedlabel=new JLabel();
     private ChessboardComponent chessboardComponent;
     private GameController gameController;
     public ChessGameFrame(int width, int height) {
@@ -41,11 +42,17 @@ public class ChessGameFrame extends JFrame {
         playerlabel.setSize(200, 60);
         playerlabel.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(playerlabel);
+        selectedlabel.setText("Selected: ");
+        selectedlabel.setLocation(HEIGTH, HEIGTH / 2-100);
+        selectedlabel.setSize(200, 60);
+        selectedlabel.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(selectedlabel);
         addTeamLabel();
         addRuleButton();
-        addLoadButton();
+        //addLoadButton();
         addRestartButton();
         addChangeColorButton();
+
     }
 
     public ChessboardComponent getChessboardComponent() {
@@ -64,6 +71,7 @@ public class ChessGameFrame extends JFrame {
         chessboardComponent.setLocation(HEIGTH /5, HEIGTH / 10);
         add(chessboardComponent);
     }
+
 
     /**
      * 在游戏面板中添加标签
@@ -126,8 +134,7 @@ public class ChessGameFrame extends JFrame {
         button.addActionListener(e -> {
             System.out.println("Click change Color");
             Object[] options = {"Grass", "River", "Trap", "Home"};
-            String name = (String) JOptionPane.showInputDialog(null, "Which to change?",
-                    "Change Color", JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+            String name = (String) JOptionPane.showInputDialog(null, "Which to change?", "Change Color", JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
             if (name == null){
             }else{
                 ColorFrame colorFrame = new ColorFrame(name);
@@ -151,4 +158,7 @@ public class ChessGameFrame extends JFrame {
         this.playerlabel = playerlabel;
     }
 
+    public static JLabel getSelectedlabel() {
+        return selectedlabel;
+    }
 }
