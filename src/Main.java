@@ -1,4 +1,5 @@
 import controller.GameController;
+import model.BackgroundMusic;
 import model.Chessboard;
 import view.ChessGameFrame;
 import view.StartFrame;

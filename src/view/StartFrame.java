@@ -1,6 +1,7 @@
 package view;
 
 import controller.GameController;
+import model.BackgroundMusic;
 import model.Chessboard;
 import view.ChessGameFrame;
 
@@ -57,6 +58,7 @@ public class StartFrame extends JFrame{
             mainFrame.setVisible(true);
             this.gameFrame=mainFrame;
             gameFrame.startFrame=this;
+            new BackgroundMusic().playMusic("resource\\music\\blues.wav");
         });
         button.setSize(240,80);
         button.setLocation(200,300);

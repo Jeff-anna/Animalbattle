@@ -2,6 +2,7 @@ package view;
 
 import controller.GameController;
 import listener.GameListener;
+import model.BackgroundMusic;
 import model.ChessboardPoint;
 import model.Chessboard;
 import javax.swing.*;
