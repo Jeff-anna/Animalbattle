@@ -85,7 +85,6 @@ public class Chessboard {
         if (!isValidCapture(src, dest)) {
             throw new IllegalArgumentException("Illegal chess capture!");
         }
-        // TODO: Finish the method.
         if (isValidCapture(src, dest)) {
             removeChessPiece(dest);
             moveChessPiece(src, dest);
@@ -102,6 +101,11 @@ public class Chessboard {
     public boolean isValidMove(ChessboardPoint src, ChessboardPoint dest) {
         if (getChessPieceAt(src) == null || getChessPieceAt(dest) != null) {
             return false;
+        }
+        if (!isOnLand(dest)) {
+            if (isMovableToRiver(src)) {
+                return calculateDistance(src, dest) == 1;
+            }else return false;
         }
         return calculateDistance(src, dest) == 1;
     }
@@ -129,10 +133,13 @@ public class Chessboard {
         return false;
     }
     public boolean isOnLand(ChessboardPoint src){
-        if(src.getCol() >= 3 && src.getCol() <= 5) {
-            return src.getRow() != 1 && src.getRow() != 2 && src.getRow() != 4 && src.getRow() != 5;
+        if(src.getRow() >= 3 && src.getRow() <= 5) {
+            return src.getCol() != 1 && src.getCol() != 2 && src.getCol() != 4 && src.getCol() != 5;
         }
         return true;
+    }
+    public boolean isMovableToRiver(ChessboardPoint src){
+        return getChessPieceAt(src).getRank() == 1;
     }
     public boolean isMovable(ChessboardPoint point){
         if(getChessPieceAt(point)!=null){
