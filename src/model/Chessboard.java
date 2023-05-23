@@ -140,12 +140,7 @@ public class Chessboard {
         }
         return false;
     }
-    public boolean isValidToJump(ChessboardPoint src, ChessboardPoint des){
-        if (getChessPieceAt(src).getRank() == 6 || getChessPieceAt(src).getRank() == 7){
-            return isOnLand(des);
-        }
-        return false;
-    }
+
     public boolean isOnLand(ChessboardPoint src){
         if(src.getRow() >= 3 && src.getRow() <= 5) {
             return src.getCol() != 1 && src.getCol() != 2 && src.getCol() != 4 && src.getCol() != 5;
