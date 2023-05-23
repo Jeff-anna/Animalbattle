@@ -30,10 +30,10 @@ public class StartFrame extends JFrame{
         addRuleButton();
 
         Image image = new ImageIcon("resource/background/start1.jpg").getImage();
-        image = image.getScaledInstance(400, 500,Image.SCALE_DEFAULT);
+        image = image.getScaledInstance(1100, 800,Image.SCALE_DEFAULT);
         ImageIcon icon = new ImageIcon(image);
         JLabel bg = new JLabel(icon);
-        bg.setSize(400, 500);
+        bg.setSize(1100, 800);
         bg.setLocation(0, 0);
         add(bg);
     }
@@ -47,7 +47,7 @@ public class StartFrame extends JFrame{
                         "狮、虎可以横直方向跳过河，而且可以直接把对岸的动物吃掉。只有鼠可以下水，在水中的鼠可以阻隔狮、虎跳河。两鼠在水内可以互吃。"));        button.setLocation(HEIGTH, HEIGTH / 10 + 120);
         button.setSize(240, 80);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        button.setLocation(200,100);
+        button.setLocation(400,100);
         add(button);
     }
     private void addBeginButton() {
@@ -61,7 +61,7 @@ public class StartFrame extends JFrame{
             new BackgroundMusic().playMusic("resource\\music\\blues.wav");
         });
         button.setSize(240,80);
-        button.setLocation(200,300);
+        button.setLocation(400,300);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
     }

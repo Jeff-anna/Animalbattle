@@ -77,6 +77,7 @@ public class GameController implements GameListener {
                 ChessGameFrame.getPlayerlabel().setText(String.format("Player: Red"));
             }
             ChessGameFrame.getSelectedlabel().setText(String.format("Selected: "));
+            view.removeAvailableCell();
 
             // TODO: if the chess enter Dens or Traps and so on
         }
@@ -93,7 +94,7 @@ public class GameController implements GameListener {
                 component.repaint();
                 view.repaint();
                 view.revalidate();
-                // view.showAvailableCell(point);
+                view.showAvailableCell(point);
                 if (component instanceof WolfChessComponent) {
                     if (component.owner == PlayerColor.BLUE) {
                         ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 蓝狼"));
@@ -151,7 +152,7 @@ public class GameController implements GameListener {
             component.revalidate();
             view.repaint();
             view.revalidate();
-            //view.removeAvailableCell();
+            view.removeAvailableCell();
             ChessGameFrame.getSelectedlabel().setText(String.format("Selected: "));
 
         } else if (model.isValidCapture(selectedPoint, point)) {
@@ -171,6 +172,7 @@ public class GameController implements GameListener {
                 ChessGameFrame.getPlayerlabel().setText(String.format("Player: Red"));
             }
             ChessGameFrame.getSelectedlabel().setText(String.format("Selected: "));
+            view.removeAvailableCell();
 
         }
     }

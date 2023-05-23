@@ -10,5 +10,6 @@ public enum CellType {
     OTHER_GRASS,
     OTHER_RIVER,
     OTHER_TRAP,
-    OTHER_DEN
+    OTHER_DEN,
+    Selected_Cell
 }

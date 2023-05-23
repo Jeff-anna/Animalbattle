@@ -25,8 +25,8 @@ public class ChessGameFrame extends JFrame {
     private GameController gameController;
     JLabel background;
     public StartFrame startFrame;
-    public final JLabel originBG;
-    public final JLabel lavaBG;
+    public final JLabel origin;
+    public final JLabel lava;
 
     public ChessGameFrame(int width, int height) {
         setTitle("斗兽棋"); //设置标题
@@ -66,19 +66,21 @@ public class ChessGameFrame extends JFrame {
         Image image = new ImageIcon("resource/background/origin.jpg").getImage();
         image = image.getScaledInstance(1100, 810,Image.SCALE_DEFAULT);
         ImageIcon icon = new ImageIcon(image);
-        originBG = new JLabel(icon);
-        originBG.setSize(1100, 810);
-        originBG.setLocation(0, 0);
+        origin = new JLabel(icon);
+        origin.setSize(1100, 810);
+        origin.setLocation(0, 0);
 
         image = new ImageIcon("resource/background/lava.png").getImage();
         image = image.getScaledInstance(1100, 810,Image.SCALE_DEFAULT);
         icon = new ImageIcon(image);
-        lavaBG = new JLabel(icon);
-        lavaBG.setSize(1100, 810);
-        lavaBG.setLocation(0, 0);
+        lava = new JLabel(icon);
+        lava.setLocation(0, 0);
+        lava.setSize(1100, 810);
 
-        background = originBG;
+
+        background = origin;
         add(background);
+
 
 
     }
@@ -131,12 +133,12 @@ public class ChessGameFrame extends JFrame {
             if (original){
                 remove(background);
                 original = false;
-                background = lavaBG;
+                background = lava;
                 add(background);
             } else {
                 remove(background);
                 original = true;
-                background = originBG;
+                background = origin;
                 add(background);
             }
             repaint();

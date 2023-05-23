@@ -36,6 +36,7 @@ public class CellComponent extends JPanel {
         else if (type == CellType.AUTUMN_RIVER) g.setColor(ChessboardComponent.lavaRiver);
         else if (type == CellType.TRAP) g.setColor(ChessboardComponent.trapColor);
         else if (type == CellType.DEN) g.setColor(ChessboardComponent.denColor);
+        else if (type == CellType.Selected_Cell) g.setColor(ChessboardComponent.Selected_Cellcolor);
         else g.setColor(background);
         g.fillRect(1, 1, this.getWidth() - 1, this.getHeight() - 1);
 

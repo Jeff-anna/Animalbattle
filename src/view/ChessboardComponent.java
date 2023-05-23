@@ -24,6 +24,7 @@ public class ChessboardComponent extends JComponent {
 
     public static final Color trapColor = new Color(189, 166, 164);
     public static final Color denColor = new Color(198, 200, 178);
+    public static final Color Selected_Cellcolor=new Color(255,255,0);
     public final CellComponent[][] gridComponents = new CellComponent[CHESSBOARD_ROW_SIZE.getNum()][CHESSBOARD_COL_SIZE.getNum()];
     private final int CHESS_SIZE;
     private final Set<ChessboardPoint> riverCell = new HashSet<>();
@@ -186,7 +187,9 @@ public class ChessboardComponent extends JComponent {
                 ChessboardPoint temp = new ChessboardPoint(i, j);
                 CellComponent cell;
                 if (availableCell.contains(temp)) {
-                    //  getGridComponentAt(temp).setColor();
+                    getGridComponentAt(temp).type=CellType.Selected_Cell;
+                    repaint();
+                    revalidate();
                     //把原有cell背景颜色设置为黄色
                     //getGridComponentAt(temp).set
                 }
@@ -200,6 +203,9 @@ public class ChessboardComponent extends JComponent {
             for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
                 ChessboardPoint temp = new ChessboardPoint(i, j);
                 if (availableCell.contains(temp)) {
+                    getGridComponentAt(temp).type=CellType.SPRING_GRASS;
+                    repaint();
+                    revalidate();
                     //把原有cell背景颜色恢复
                     //this.remove(getGridComponentAt(temp));
                 }
