@@ -70,7 +70,9 @@ public class GameController implements GameListener {
             swapColor();
             view.repaint();
             turn++;
-            ChessGameFrame.getTurnlabel().setText(String.format("Turn: %d", turn));
+
+            ChessGameFrame.getTurnlabel().setText(String.format("Turn: %d", (turn+1)/2));
+
             if (turn % 2 == 1) {
                 ChessGameFrame.getPlayerlabel().setText(String.format("Player: Blue"));
             } else {
@@ -94,8 +96,10 @@ public class GameController implements GameListener {
                 component.repaint();
                 view.repaint();
                 view.revalidate();
-                if(component.getRank()!=1) {
+                if(component.getRank()!=1&&component.getRank()!=6&&component.getRank()!=7) {
                     view.showAvailableCell(point);
+                }else if(component.getRank()==7||component.getRank()==6){
+                    view.show67AvailableCell(point);
                 }else{
                     view.showMouseAvailable(point);
                 }
@@ -168,8 +172,10 @@ public class GameController implements GameListener {
             view.repaint();
             view.revalidate();
             component.revalidate();
+
             turn++;
-            ChessGameFrame.getTurnlabel().setText(String.format("Turn: %d", turn));
+            ChessGameFrame.getTurnlabel().setText(String.format("Turn: %d", (turn+1)/2));
+
             if (turn % 2 == 1) {
                 ChessGameFrame.getPlayerlabel().setText(String.format("Player: Blue"));
             } else {

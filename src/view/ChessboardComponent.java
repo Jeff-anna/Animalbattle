@@ -28,6 +28,8 @@ public class ChessboardComponent extends JComponent {
     public final CellComponent[][] gridComponents = new CellComponent[CHESSBOARD_ROW_SIZE.getNum()][CHESSBOARD_COL_SIZE.getNum()];
     private final int CHESS_SIZE;
     private final Set<ChessboardPoint> riverCell = new HashSet<>();
+    private final Set<ChessboardPoint> byriverCell = new HashSet<>();
+
     private final Set<ChessboardPoint> trapCell = new HashSet<>();
     private final Set<ChessboardPoint> homeCell = new HashSet<>();
     private static final Set<ChessboardPoint> availableCell = new HashSet<>();
@@ -128,6 +130,26 @@ public class ChessboardComponent extends JComponent {
         riverCell.add(new ChessboardPoint(4, 5));
         riverCell.add(new ChessboardPoint(5, 4));
         riverCell.add(new ChessboardPoint(5, 5));
+        byriverCell.add(new ChessboardPoint(3,0));
+        byriverCell.add(new ChessboardPoint(4,0));
+        byriverCell.add(new ChessboardPoint(5,0));
+        byriverCell.add(new ChessboardPoint(3,3));
+        byriverCell.add(new ChessboardPoint(4,3));
+        byriverCell.add(new ChessboardPoint(5,3));
+        byriverCell.add(new ChessboardPoint(3,6));
+        byriverCell.add(new ChessboardPoint(4,6));
+        byriverCell.add(new ChessboardPoint(5,6));
+
+        byriverCell.add(new ChessboardPoint(2,1));
+        byriverCell.add(new ChessboardPoint(2,2));
+        byriverCell.add(new ChessboardPoint(2,4));
+        byriverCell.add(new ChessboardPoint(2,5));
+        byriverCell.add(new ChessboardPoint(6,1));
+        byriverCell.add(new ChessboardPoint(6,2));
+        byriverCell.add(new ChessboardPoint(6,4));
+        byriverCell.add(new ChessboardPoint(6,5));
+
+
         trapCell.add(new ChessboardPoint(0, 2));
         trapCell.add(new ChessboardPoint(0, 4));
         trapCell.add(new ChessboardPoint(1, 3));
@@ -230,6 +252,63 @@ public class ChessboardComponent extends JComponent {
         }
 
     }
+    public void show67AvailableCell(ChessboardPoint point) {
+        ChessboardPoint[] a = new ChessboardPoint[8];
+        ChessboardPoint down = new ChessboardPoint(point.getRow() + 1, point.getCol());
+        ChessboardPoint up = new ChessboardPoint(point.getRow() - 1, point.getCol());
+        ChessboardPoint right = new ChessboardPoint(point.getRow(), point.getCol() + 1);
+        ChessboardPoint left = new ChessboardPoint(point.getRow(), point.getCol() - 1);
+        ChessboardPoint dwn = new ChessboardPoint(point.getRow() + 4, point.getCol());
+        ChessboardPoint u = new ChessboardPoint(point.getRow() -4, point.getCol());
+        ChessboardPoint lft = new ChessboardPoint(point.getRow() , point.getCol()-3);
+        ChessboardPoint rgt = new ChessboardPoint(point.getRow() , point.getCol()+3);
+
+        a[0] = down;
+        a[1] = up;
+        a[2] = right;
+        a[3] = left;
+        availableCell.add(down);
+        availableCell.add(up);
+        availableCell.add(right);
+        availableCell.add(left);
+        for (ChessboardPoint b : a) {
+            if (!isMovable(b)) {
+                availableCell.remove(b);
+            }
+        }
+        if(byriverCell.contains(point)) {
+
+            a[4]=dwn;
+            a[5]=u;
+            a[6]=lft;
+            a[7]=rgt;
+
+            availableCell.add(dwn);
+            availableCell.add(u);
+            availableCell.add(lft);
+            availableCell.add(rgt);
+            for (int x=4;x<a.length;x++) {
+                if (!isCrossRiver(point,a[x])) {
+                    availableCell.remove(a[x]);
+                }
+            }
+        }
+
+        for (int i = 0; i < CHESSBOARD_ROW_SIZE.getNum(); i++) {
+            for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
+                ChessboardPoint temp = new ChessboardPoint(i, j);
+                if (availableCell.contains(temp)) {
+                    getGridComponentAt(temp).type = CellType.Selected_Cell;
+                    repaint();
+                    revalidate();
+                    //把原有cell背景颜色设置为黄色
+                    //getGridComponentAt(temp).set
+                }
+            }
+        }
+
+    }
+
 
     public void removeAvailableCell() {
         for (int i = 0; i < CHESSBOARD_ROW_SIZE.getNum(); i++) {
@@ -373,5 +452,23 @@ public class ChessboardComponent extends JComponent {
         }
 
         return a;
+    }
+    private boolean isValidToJump(ChessboardPoint src){
+        if (getChessComponentAt(src).getRank() == 6 || getChessComponentAt(src).getRank() == 7){
+            return true;
+        }
+        return false;
+    }
+    private int calculateDistance(ChessboardPoint src, ChessboardPoint dest) {
+        return Math.abs(src.getRow() - dest.getRow()) + Math.abs(src.getCol() - dest.getCol());
+    }
+    private boolean isCrossRiver(ChessboardPoint src, ChessboardPoint dest) {
+        return (byriverCell.contains(src)&&byriverCell.contains(dest));
+    }
+    private boolean isOnLand(ChessboardPoint src){
+        if(src.getRow() >= 3 && src.getRow() <= 5) {
+            return src.getCol() != 1 && src.getCol() != 2 && src.getCol() != 4 && src.getCol() != 5;
+        }
+        return true;
     }
 }
