@@ -61,6 +61,7 @@ public class Chessboard {
         return grid[point.getRow()][point.getCol()];
     }
 
+
     private int calculateDistance(ChessboardPoint src, ChessboardPoint dest) {
         return Math.abs(src.getRow() - dest.getRow()) + Math.abs(src.getCol() - dest.getCol());
     }
