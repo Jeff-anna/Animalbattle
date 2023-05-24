@@ -44,7 +44,7 @@ public class HomeChessComponent extends ChessComponent {
         Font font = new Font("楷体", Font.PLAIN, getWidth() / 2);
         g2.setFont(font);
         g2.setColor(owner.getColor());
-        g2.drawString("家", getWidth() / 4, getHeight() * 5 / 8); // FIXME: Use library to find the correct offset.
+        g2.drawString(" ", getWidth() / 4, getHeight() * 5 / 8); // FIXME: Use library to find the correct offset.
         if (isSelected()) { // Highlights the model if selected.
             g.setColor(Color.WHITE);
             //THIS X Y MEANS RELATIVE TO THE CENTER OF THE CHESS

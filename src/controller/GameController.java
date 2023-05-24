@@ -94,7 +94,11 @@ public class GameController implements GameListener {
                 component.repaint();
                 view.repaint();
                 view.revalidate();
-                view.showAvailableCell(point);
+                if(component.getRank()!=1) {
+                    view.showAvailableCell(point);
+                }else{
+                    view.showMouseAvailable(point);
+                }
                 if (component instanceof WolfChessComponent) {
                     if (component.owner == PlayerColor.BLUE) {
                         ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 蓝狼"));

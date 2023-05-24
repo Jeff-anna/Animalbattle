@@ -24,7 +24,7 @@ public class ChessboardComponent extends JComponent {
 
     public static final Color trapColor = new Color(189, 166, 164);
     public static final Color denColor = new Color(198, 200, 178);
-    public static final Color Selected_Cellcolor=new Color(255,255,0);
+    public static final Color Selected_Cellcolor = new Color(255, 255, 0);
     public final CellComponent[][] gridComponents = new CellComponent[CHESSBOARD_ROW_SIZE.getNum()][CHESSBOARD_COL_SIZE.getNum()];
     private final int CHESS_SIZE;
     private final Set<ChessboardPoint> riverCell = new HashSet<>();
@@ -185,9 +185,42 @@ public class ChessboardComponent extends JComponent {
         for (int i = 0; i < CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
                 ChessboardPoint temp = new ChessboardPoint(i, j);
-                CellComponent cell;
                 if (availableCell.contains(temp)) {
-                    getGridComponentAt(temp).type=CellType.Selected_Cell;
+                    getGridComponentAt(temp).type = CellType.Selected_Cell;
+                    repaint();
+                    revalidate();
+                    //把原有cell背景颜色设置为黄色
+                    //getGridComponentAt(temp).set
+                }
+            }
+        }
+
+    }
+
+    public void showMouseAvailable(ChessboardPoint point) {
+        ChessboardPoint[] a = new ChessboardPoint[4];
+        ChessboardPoint down = new ChessboardPoint(point.getRow() + 1, point.getCol());
+        ChessboardPoint up = new ChessboardPoint(point.getRow() - 1, point.getCol());
+        ChessboardPoint right = new ChessboardPoint(point.getRow(), point.getCol() + 1);
+        ChessboardPoint left = new ChessboardPoint(point.getRow(), point.getCol() - 1);
+        a[0] = down;
+        a[1] = up;
+        a[2] = right;
+        a[3] = left;
+        availableCell.add(down);
+        availableCell.add(up);
+        availableCell.add(right);
+        availableCell.add(left);
+        for (ChessboardPoint b : a) {
+            if (!isMouseMovable(b)) {
+                availableCell.remove(b);
+            }
+        }
+        for (int i = 0; i < CHESSBOARD_ROW_SIZE.getNum(); i++) {
+            for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
+                ChessboardPoint temp = new ChessboardPoint(i, j);
+                if (availableCell.contains(temp)) {
+                    getGridComponentAt(temp).type = CellType.Selected_Cell;
                     repaint();
                     revalidate();
                     //把原有cell背景颜色设置为黄色
@@ -203,16 +236,22 @@ public class ChessboardComponent extends JComponent {
             for (int j = 0; j < CHESSBOARD_COL_SIZE.getNum(); j++) {
                 ChessboardPoint temp = new ChessboardPoint(i, j);
                 if (availableCell.contains(temp)) {
-                    getGridComponentAt(temp).type=CellType.SPRING_GRASS;
-                    repaint();
-                    revalidate();
-                    //把原有cell背景颜色恢复
-                    //this.remove(getGridComponentAt(temp));
+                    if (riverCell.contains(temp)) {
+                        getGridComponentAt(temp).type = CellType.SPRING_RIVER;
+                    }else {
+                        getGridComponentAt(temp).type = CellType.SPRING_GRASS;
+                    }
                 }
+                repaint();
+                revalidate();
+                //把原有cell背景颜色恢复
+                //this.remove(getGridComponentAt(temp));
             }
         }
         availableCell.clear();
+
     }
+
 
     public void registerController(GameController gameController) {
         this.gameController = gameController;
@@ -317,9 +356,22 @@ public class ChessboardComponent extends JComponent {
         } catch (Exception e) {
             a = true;
         }
+
         if (riverCell.contains(point)) {
             a = false;
         }
+        return a;
+    }
+    private boolean isMouseMovable(ChessboardPoint point) {
+        boolean a = true;
+        try {
+            if (getChessComponentAt(point) != null) {
+                a = false;
+            }
+        } catch (Exception e) {
+            a = true;
+        }
+
         return a;
     }
 }
