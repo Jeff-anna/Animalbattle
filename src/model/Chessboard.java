@@ -46,8 +46,8 @@ public class Chessboard {
         grid[8][2].setPiece(new ChessPiece(PlayerColor.RED, "Trap",0));
         grid[8][4].setPiece(new ChessPiece(PlayerColor.RED, "Trap",0));
         grid[7][3].setPiece(new ChessPiece(PlayerColor.RED, "Trap",0));
-        grid[8][3].setPiece(new ChessPiece(PlayerColor.RED, "Home",0));
-        grid[0][3].setPiece(new ChessPiece(PlayerColor.BLUE, "Home",0));
+        grid[8][3].setPiece(new ChessPiece(PlayerColor.RED, "Home",9));
+        grid[0][3].setPiece(new ChessPiece(PlayerColor.BLUE, "Home",9));
 
 
 
@@ -116,11 +116,11 @@ public class Chessboard {
 
 
     public boolean isValidCapture(ChessboardPoint src, ChessboardPoint dest) {
-        if ((isOnLand(src) && isOnLand(dest)) || (!isOnLand(src) && !isOnLand(dest))) {
-            if (isValidToHome(src, dest)) {
-                return true;
-            }
-            else if (isValidCapture67(src, dest) && !isValidToHome(src, dest)) {
+        if (getChessPieceAt(dest).getRank() == 9) {
+            return isValidToHome(src, dest);
+        }
+        if (((isOnLand(src) && isOnLand(dest)) || (!isOnLand(src) && !isOnLand(dest))) && getChessPieceAt(dest).getRank() != 9) {
+            if (isValidCapture67(src, dest)) {
                 return true;
             }
             else if ((calculateDistance(src, dest) == 1) && ((getChessPieceOwner(src) != getChessPieceOwner(dest)) || getChessPieceAt(dest).getRank() == 0)) {
@@ -143,8 +143,8 @@ public class Chessboard {
         }return false;
     }
     public boolean isValidToHome(ChessboardPoint src, ChessboardPoint dest) {
-        if (getChessPieceAt(dest).getRank() == -1) {
-            return calculateDistance(src, dest) == 1 && getChessPieceOwner(src) != getChessPieceOwner(dest);
+        if (getChessPieceAt(dest).getRank() == 9 && getChessPieceOwner(src) != getChessPieceOwner(dest)) {
+            return calculateDistance(src, dest) == 1;
         }
         return false;
     }
@@ -167,10 +167,5 @@ public class Chessboard {
         }
         return false;
     }
-    public boolean isMovable(ChessboardPoint point){
-        if(getChessPieceAt(point)!=null){
-            return false;
-        }
-        return true;
-    }
+
 }

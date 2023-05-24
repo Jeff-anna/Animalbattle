@@ -12,7 +12,6 @@ public class ChessComponent extends JComponent {
     public PlayerColor owner;
     private int rank;
     int size;
-    public final String[] names = {"鼠","猫","狗","狼","豹","虎","狮","象"};
     private boolean selected;
     public ChessComponent(PlayerColor owner,int rank, int size) {
         this.owner = owner;

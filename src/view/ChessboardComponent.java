@@ -453,22 +453,10 @@ public class ChessboardComponent extends JComponent {
 
         return a;
     }
-    private boolean isValidToJump(ChessboardPoint src){
-        if (getChessComponentAt(src).getRank() == 6 || getChessComponentAt(src).getRank() == 7){
-            return true;
-        }
-        return false;
-    }
     private int calculateDistance(ChessboardPoint src, ChessboardPoint dest) {
         return Math.abs(src.getRow() - dest.getRow()) + Math.abs(src.getCol() - dest.getCol());
     }
     private boolean isCrossRiver(ChessboardPoint src, ChessboardPoint dest) {
         return (byriverCell.contains(src)&&byriverCell.contains(dest));
-    }
-    private boolean isOnLand(ChessboardPoint src){
-        if(src.getRow() >= 3 && src.getRow() <= 5) {
-            return src.getCol() != 1 && src.getCol() != 2 && src.getCol() != 4 && src.getCol() != 5;
-        }
-        return true;
     }
 }
