@@ -457,6 +457,12 @@ public class ChessboardComponent extends JComponent {
         return Math.abs(src.getRow() - dest.getRow()) + Math.abs(src.getCol() - dest.getCol());
     }
     private boolean isCrossRiver(ChessboardPoint src, ChessboardPoint dest) {
-        return (byriverCell.contains(src)&&byriverCell.contains(dest));
+        if(src.getRow()==dest.getRow()&&(src.getCol()==0||src.getCol()==3||src.getCol()==6)) {
+            return (byriverCell.contains(src) && byriverCell.contains(dest));
+        }
+        if(src.getCol()== dest.getCol()&&(src.getCol()==1||src.getCol()==2||src.getCol()==4||src.getCol()==5)){
+            return (byriverCell.contains(src) && byriverCell.contains(dest));
+        }
+        return false;
     }
 }

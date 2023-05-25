@@ -172,7 +172,6 @@ public class GameController implements GameListener {
             view.repaint();
             view.revalidate();
             component.revalidate();
-
             turn++;
             ChessGameFrame.getTurnlabel().setText(String.format("Turn: %d", (turn+1)/2));
 

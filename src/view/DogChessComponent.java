@@ -34,11 +34,11 @@ public class DogChessComponent extends ChessComponent {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         ImageIcon pic = new ImageIcon("resource\\chesspicture\\reddog.jpg");
         if (owner == PlayerColor.BLUE){
             pic = new ImageIcon("resource\\chesspicture\\bluedog.jpg");
-        }        Image image = pic.getImage();
+        }
+        Image image = pic.getImage();
         pic = new ImageIcon(image.getScaledInstance(size, size,Image.SCALE_SMOOTH));
         JLabel label = new JLabel(pic);
         label.setSize(size, size);
