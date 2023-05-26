@@ -1,5 +1,7 @@
 package model;
 
+import view.ChessboardComponent;
+
 /**
  * This class store the real chess information.
  * The Chessboard has 9*7 cells, and each cell has a position for chess
@@ -119,7 +121,14 @@ public class Chessboard {
         if (getChessPieceAt(dest).getRank() == 9) {
             return isValidToHome(src, dest);
         }
-        if (((isOnLand(src) && isOnLand(dest)) || (!isOnLand(src) && !isOnLand(dest))) && getChessPieceAt(dest).getRank() != 9) {
+        else if (getChessPieceAt(dest).getRank() == 0) {
+            if (getChessPieceOwner(src) != getChessPieceOwner(dest)){
+                getChessPieceAt(src).setRank(1);
+                return true;
+            }
+            return true;
+        }
+        else if (((isOnLand(src) && isOnLand(dest)) || (!isOnLand(src) && !isOnLand(dest)))) {
             if (isValidCapture67(src, dest)) {
                 return true;
             }

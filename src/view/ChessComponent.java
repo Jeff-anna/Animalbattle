@@ -34,8 +34,6 @@ public class ChessComponent extends JComponent {
         return rank;
     }
 
-
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);

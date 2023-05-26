@@ -54,6 +54,11 @@ public class GameController implements GameListener {
 
     private boolean win() {
         // TODO: Check the board if there is a winner
+        for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
+            for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
+
+            }
+        }
         return false;
     }
 

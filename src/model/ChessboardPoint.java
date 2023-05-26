@@ -1,5 +1,4 @@
 package model;
-import view.ChessboardComponent;
 
 /**
  * This class represents positions on the checkerboard, such as (0, 0), (0, 7), and so on
@@ -12,14 +11,6 @@ public class ChessboardPoint {
     public ChessboardPoint(int row, int col) {
         this.row = row;
         this.col = col;
-    }
-
-    public void setCol(int col) {
-        this.col = col;
-    }
-
-    public void setRow(int row) {
-        this.row = row;
     }
 
     public int getRow() {
