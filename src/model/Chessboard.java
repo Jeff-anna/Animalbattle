@@ -7,7 +7,7 @@ import view.ChessboardComponent;
  * The Chessboard has 9*7 cells, and each cell has a position for chess
  */
 public class Chessboard {
-    private Cell[][] grid;
+    public Cell[][] grid;
 
     public Chessboard() {
         this.grid =

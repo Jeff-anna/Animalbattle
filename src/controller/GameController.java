@@ -2,10 +2,7 @@ package controller;
 
 
 import listener.GameListener;
-import model.Constant;
-import model.PlayerColor;
-import model.Chessboard;
-import model.ChessboardPoint;
+import model.*;
 import view.*;
 import view.ChessGameFrame;
 
@@ -52,14 +49,29 @@ public class GameController implements GameListener {
         currentPlayer = currentPlayer == PlayerColor.BLUE ? PlayerColor.RED : PlayerColor.BLUE;
     }
 
-    private boolean win() {
-        // TODO: Check the board if there is a winner
+    private int win() {
+        if (model.grid[8][3].getPiece().getOwner().equals(PlayerColor.BLUE)) {
+            return 1;
+        }
+        if (model.grid[0][3].getPiece().getOwner().equals(PlayerColor.RED)) {
+            return 2;
+        }
+        int RedWin = 2, BlueWin = 1;
         for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
-
+                model.grid[i][j].getPiece().getOwner().equals(PlayerColor.RED);
+                BlueWin = 0;
+                model.grid[i][j].getPiece().getOwner().equals(PlayerColor.BLUE);
+                RedWin = 0;
             }
         }
-        return false;
+        if (RedWin == 2) {
+            return 2;
+        }
+        if (BlueWin == 1) {
+            return 1;
+        }
+        return 0;
     }
 
 
