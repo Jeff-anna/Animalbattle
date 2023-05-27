@@ -6,6 +6,10 @@ import model.*;
 import view.*;
 import view.ChessGameFrame;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+
 /**
  * Controller is the connection between model and view,
  * when a Controller receive a request from a view, the Controller
@@ -216,8 +220,22 @@ public class GameController implements GameListener {
         }
     }
 
-    public static void loadGameFromFile(String path) {
-
+    public void loadGameFromFile(String path) {
+        try{
+            List<String> lines= Files.readAllLines(Path.of(path));
+            model.removeAllPieces();
+            model.initPieces(lines);
+            view.removeChessComponent();
+            view.initiateChessComponent(model);
+            currentPlayer = PlayerColor.BLUE;
+            view.turnlable.setText("Turn: 1");
+            view.playerlable.setText("player: Blue");
+            turn = 1;
+            selectedPoint = null;
+            view.repaint();
+        }catch(Exception e){
+            throw new RuntimeException(e);
+        }
     }
 
     public void reset() {

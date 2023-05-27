@@ -34,7 +34,7 @@ public class ChessboardComponent extends JComponent {
     private final Set<ChessboardPoint> homeCell = new HashSet<>();
     private static final Set<ChessboardPoint> availableCell = new HashSet<>();
 
-    private GameController gameController;
+    public GameController gameController;
     public JLabel turnlable;
     public JLabel playerlable;
 

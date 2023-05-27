@@ -65,9 +65,8 @@ public class ChessGameFrame extends JFrame {
         add(winlabel);
 
         addTeamLabel();
-        //addLoadButton();
+        addLoadButton();
         addRestartButton();
-        addChangeColorButton();
         addChangeThemeButton();
         addBackButton();
 
@@ -136,18 +135,17 @@ public class ChessGameFrame extends JFrame {
         add(button);
 
         button.addActionListener(e -> {
-            System.out.println("Click change theme");
             chessboardComponent.changeTheme(original);
             if (original){
                 remove(background);
-                original = false;
                 background = lava;
                 add(background);
+                original = false;
             } else {
                 remove(background);
-                original = true;
                 background = origin;
                 add(background);
+                original = true;
             }
             repaint();
             revalidate();
@@ -170,7 +168,7 @@ public class ChessGameFrame extends JFrame {
 
     private void addLoadButton() {
         JButton button = new JButton("Load");
-        button.setLocation(HEIGTH, HEIGTH / 10 + 240);
+        button.setLocation(HEIGTH, HEIGTH / 10 + 120);
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
@@ -178,7 +176,7 @@ public class ChessGameFrame extends JFrame {
         button.addActionListener(e -> {
             System.out.println("Click load");
             String path = JOptionPane.showInputDialog(this,"Input Path here");
-            GameController.loadGameFromFile(path);
+            chessboardComponent.gameController.loadGameFromFile(path);
         });
     }
     private void addRestartButton() {
@@ -191,24 +189,7 @@ public class ChessGameFrame extends JFrame {
            chessboardComponent.getGameController().reset();
         });
     }
-    private void addChangeColorButton() {
-        JButton button = new JButton("Change Color");
-        button.setLocation(HEIGHT+793, HEIGHT / 10+600 );
-        button.setSize(200, 60);
-        button.setFont(new Font("Rockwell", Font.BOLD, 20));
-        add(button);
 
-        button.addActionListener(e -> {
-            System.out.println("Click change Color");
-            Object[] options = {"Grass", "River", "Trap", "Home"};
-            String name = (String) JOptionPane.showInputDialog(null, "Which to change?", "Change Color", JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-            if (name == null){
-            }else{
-                ColorFrame colorFrame = new ColorFrame(name);
-                colorFrame.gameFrame = this;
-            }
-        });
-    }
     public static JLabel getTurnlabel() {
         return turnlabel;
     }
