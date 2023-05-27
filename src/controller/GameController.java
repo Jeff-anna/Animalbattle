@@ -49,7 +49,7 @@ public class GameController implements GameListener {
         currentPlayer = currentPlayer == PlayerColor.BLUE ? PlayerColor.RED : PlayerColor.BLUE;
     }
 
-    private int win() {
+    public int win() {
         if (model.grid[8][3].getPiece().getOwner().equals(PlayerColor.BLUE)) {
             return 1;
         }
@@ -59,10 +59,15 @@ public class GameController implements GameListener {
         int RedWin = 2, BlueWin = 1;
         for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
             for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
-                model.grid[i][j].getPiece().getOwner().equals(PlayerColor.RED);
-                BlueWin = 0;
-                model.grid[i][j].getPiece().getOwner().equals(PlayerColor.BLUE);
-                RedWin = 0;
+                try {
+                    if (model.grid[i][j].getPiece().getOwner().equals(PlayerColor.RED)) {
+                        BlueWin = 0;
+                    }
+                    if (model.grid[i][j].getPiece().getOwner().equals(PlayerColor.BLUE)) {
+                        RedWin = 0;
+                    }
+                }catch(Exception e){
+                }
             }
         }
         if (RedWin == 2) {
@@ -190,6 +195,14 @@ public class GameController implements GameListener {
             view.revalidate();
             component.revalidate();
             turn++;
+            if(win()==1){
+                ChessGameFrame.getWinlabel().setText(String.format("Winner: Blue"));
+                view.removeChessComponent();
+
+            }else if(win()==2){
+                ChessGameFrame.getWinlabel().setText(String.format("Winner: Red"));
+                view.removeChessComponent();
+            }
             ChessGameFrame.getTurnlabel().setText(String.format("Turn: %d", (turn+1)/2));
 
             if (turn % 2 == 1) {

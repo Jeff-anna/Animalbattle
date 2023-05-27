@@ -21,6 +21,8 @@ public class ChessGameFrame extends JFrame {
     public static JLabel turnlabel=new JLabel();
     public static JLabel playerlabel=new JLabel();
     public static JLabel selectedlabel=new JLabel();
+    public static JLabel winlabel=new JLabel();
+
     private ChessboardComponent chessboardComponent;
     private GameController gameController;
     JLabel background;
@@ -56,6 +58,12 @@ public class ChessGameFrame extends JFrame {
         selectedlabel.setSize(200, 60);
         selectedlabel.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(selectedlabel);
+        winlabel.setText("Winner: ");
+        winlabel.setLocation(850, 10);
+        winlabel.setSize(200, 60);
+        winlabel.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(winlabel);
+
         addTeamLabel();
         //addLoadButton();
         addRestartButton();
@@ -219,5 +227,9 @@ public class ChessGameFrame extends JFrame {
 
     public static JLabel getSelectedlabel() {
         return selectedlabel;
+    }
+
+    public static JLabel getWinlabel() {
+        return winlabel;
     }
 }
