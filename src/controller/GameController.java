@@ -100,11 +100,11 @@ public class GameController implements GameListener {
             ChessGameFrame.getTurnlabel().setText(String.format("Turn: %d", (turn+1)/2));
 
             if (turn % 2 == 1) {
-                ChessGameFrame.getPlayerlabel().setText(String.format("Player: Blue"));
+                ChessGameFrame.getPlayerlabel().setText("Player: Blue");
             } else {
-                ChessGameFrame.getPlayerlabel().setText(String.format("Player: Red"));
+                ChessGameFrame.getPlayerlabel().setText("Player: Red");
             }
-            ChessGameFrame.getSelectedlabel().setText(String.format("Selected: "));
+            ChessGameFrame.getSelectedlabel().setText("Selected: ");
             view.removeAvailableCell();
 
             // TODO: if the chess enter Dens or Traps and so on
@@ -131,51 +131,51 @@ public class GameController implements GameListener {
                 }
                 if (component instanceof WolfChessComponent) {
                     if (component.owner == PlayerColor.BLUE) {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 蓝狼"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 蓝狼");
                     } else {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 红狼"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 红狼");
                     }
                 } else if (component instanceof MouseChessComponent) {
                     if (component.owner == PlayerColor.BLUE) {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 蓝鼠"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 蓝鼠");
                     } else {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 红鼠"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 红鼠");
                     }
                 } else if (component instanceof CatChessComponent) {
                     if (component.owner == PlayerColor.BLUE) {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 蓝猫"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 蓝猫");
                     } else {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 红猫"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 红猫");
                     }
                 } else if (component instanceof DogChessComponent) {
                     if (component.owner == PlayerColor.BLUE) {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 蓝狗"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 蓝狗");
                     } else {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 红狗"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 红狗");
                     }
                 } else if (component instanceof LeopardChessComponent) {
                     if (component.owner == PlayerColor.BLUE) {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 蓝豹"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 蓝豹");
                     } else {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 红豹"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 红豹");
                     }
                 } else if (component instanceof TigerChessComponent) {
                     if (component.owner == PlayerColor.BLUE) {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 蓝虎"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 蓝虎");
                     } else {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 红虎"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 红虎");
                     }
                 } else if (component instanceof LionChessComponent) {
                     if (component.owner == PlayerColor.BLUE) {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 蓝狮"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 蓝狮");
                     } else {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 红狮"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 红狮");
                     }
                 } else if (component instanceof ElephantChessComponent) {
                     if (component.owner == PlayerColor.BLUE) {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 蓝象"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 蓝象");
                     } else {
-                        ChessGameFrame.getSelectedlabel().setText(String.format("Selected: 红象"));
+                        ChessGameFrame.getSelectedlabel().setText("Selected: 红象");
                     }
                 }
             }
@@ -187,7 +187,7 @@ public class GameController implements GameListener {
             view.repaint();
             view.revalidate();
             view.removeAvailableCell();
-            ChessGameFrame.getSelectedlabel().setText(String.format("Selected: "));
+            ChessGameFrame.getSelectedlabel().setText("Selected: ");
 
         } else if (model.isValidCapture(selectedPoint, point)) {
             model.captureChessPiece(selectedPoint, point);
@@ -200,21 +200,21 @@ public class GameController implements GameListener {
             component.revalidate();
             turn++;
             if(win()==1){
-                ChessGameFrame.getWinlabel().setText(String.format("Winner: Blue"));
+                ChessGameFrame.getWinlabel().setText("Winner: Blue");
                 view.removeChessComponent();
 
             }else if(win()==2){
-                ChessGameFrame.getWinlabel().setText(String.format("Winner: Red"));
+                ChessGameFrame.getWinlabel().setText("Winner: Red");
                 view.removeChessComponent();
             }
             ChessGameFrame.getTurnlabel().setText(String.format("Turn: %d", (turn+1)/2));
 
             if (turn % 2 == 1) {
-                ChessGameFrame.getPlayerlabel().setText(String.format("Player: Blue"));
+                ChessGameFrame.getPlayerlabel().setText("Player: Blue");
             } else {
-                ChessGameFrame.getPlayerlabel().setText(String.format("Player: Red"));
+                ChessGameFrame.getPlayerlabel().setText("Player: Red");
             }
-            ChessGameFrame.getSelectedlabel().setText(String.format("Selected: "));
+            ChessGameFrame.getSelectedlabel().setText("Selected: ");
             view.removeAvailableCell();
 
         }

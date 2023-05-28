@@ -1,7 +1,6 @@
 package view;
 
 import model.CellType;
-import view.ChessboardComponent;
 
 import javax.swing.*;
 import java.awt.*;

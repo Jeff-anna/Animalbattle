@@ -1,17 +1,11 @@
 package view;
-
-import controller.GameController;
-import listener.GameListener;
-import model.BackgroundMusic;
-import model.ChessboardPoint;
-import model.Chessboard;
 import javax.swing.*;
 import java.awt.*;
-import view.StartFrame;
 
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
  */
+
 public class ChessGameFrame extends JFrame {
     //    public final Dimension FRAME_SIZE ;
     private final int WIDTH;
@@ -24,7 +18,6 @@ public class ChessGameFrame extends JFrame {
     public static JLabel winlabel=new JLabel();
 
     private ChessboardComponent chessboardComponent;
-    private GameController gameController;
     JLabel background;
     public StartFrame startFrame;
     public final JLabel origin;
@@ -96,9 +89,6 @@ public class ChessGameFrame extends JFrame {
         return chessboardComponent;
     }
 
-    public void setChessboardComponent(ChessboardComponent chessboardComponent) {
-        this.chessboardComponent = chessboardComponent;
-    }
 
     /**
      * 在游戏面板中添加棋盘
@@ -189,9 +179,7 @@ public class ChessGameFrame extends JFrame {
         button.setSize(200, 60);
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
-        button.addActionListener(e -> {
-           chessboardComponent.getGameController().reset();
-        });
+        button.addActionListener(e -> chessboardComponent.getGameController().reset());
     }
 
     public static JLabel getTurnlabel() {
@@ -199,7 +187,7 @@ public class ChessGameFrame extends JFrame {
     }
 
     public void setTurnlabel(JLabel turnlabel) {
-        this.turnlabel = turnlabel;
+        ChessGameFrame.turnlabel = turnlabel;
     }
 
     public static JLabel getPlayerlabel() {
@@ -207,7 +195,7 @@ public class ChessGameFrame extends JFrame {
     }
 
     public void setPlayerlabel(JLabel playerlabel) {
-        this.playerlabel = playerlabel;
+        ChessGameFrame.playerlabel = playerlabel;
     }
 
     public static JLabel getSelectedlabel() {

@@ -66,35 +66,26 @@ public class ChessboardComponent extends JComponent {
                 if (grid[i][j].getPiece() != null) {
                     ChessPiece chessPiece = grid[i][j].getPiece();
                     System.out.println(chessPiece.getOwner());
-                    if (chessPiece.getName().equals("Elephant")) {
-                        gridComponents[i][j].add(
+                    switch (chessPiece.getName()) {
+                        case "Elephant" -> gridComponents[i][j].add(
                                 new ElephantChessComponent(chessPiece.getOwner(), CHESS_SIZE));
-                    } else if (chessPiece.getName().equals("Lion")) {
-                        gridComponents[i][j].add(
+                        case "Lion" -> gridComponents[i][j].add(
                                 new LionChessComponent(chessPiece.getOwner(), CHESS_SIZE));
-                    } else if (chessPiece.getName().equals("Tiger")) {
-                        gridComponents[i][j].add(
+                        case "Tiger" -> gridComponents[i][j].add(
                                 new TigerChessComponent(chessPiece.getOwner(), CHESS_SIZE));
-                    } else if (chessPiece.getName().equals("Leopard")) {
-                        gridComponents[i][j].add(
+                        case "Leopard" -> gridComponents[i][j].add(
                                 new LeopardChessComponent(chessPiece.getOwner(), CHESS_SIZE));
-                    } else if (chessPiece.getName().equals("Wolf")) {
-                        gridComponents[i][j].add(
+                        case "Wolf" -> gridComponents[i][j].add(
                                 new WolfChessComponent(chessPiece.getOwner(), CHESS_SIZE));
-                    } else if (chessPiece.getName().equals("Dog")) {
-                        gridComponents[i][j].add(
+                        case "Dog" -> gridComponents[i][j].add(
                                 new DogChessComponent(chessPiece.getOwner(), CHESS_SIZE));
-                    } else if (chessPiece.getName().equals("Cat")) {
-                        gridComponents[i][j].add(
+                        case "Cat" -> gridComponents[i][j].add(
                                 new CatChessComponent(chessPiece.getOwner(), CHESS_SIZE));
-                    } else if (chessPiece.getName().equals("Mouse")) {
-                        gridComponents[i][j].add(
+                        case "Mouse" -> gridComponents[i][j].add(
                                 new MouseChessComponent(chessPiece.getOwner(), CHESS_SIZE));
-                    } else if (chessPiece.getName().equals("Trap")) {
-                        gridComponents[i][j].add(
+                        case "Trap" -> gridComponents[i][j].add(
                                 new TrapChessComponent(chessPiece.getOwner(), CHESS_SIZE));
-                    } else if (chessPiece.getName().equals("Home")) {
-                        gridComponents[i][j].add(
+                        case "Home" -> gridComponents[i][j].add(
                                 new HomeChessComponent(chessPiece.getOwner(), CHESS_SIZE));
                     }
                 }
@@ -200,7 +191,7 @@ public class ChessboardComponent extends JComponent {
         availableCell.add(right);
         availableCell.add(left);
         for (ChessboardPoint b : a) {
-            if (!isMovable(b)) {
+            if (isMovable(b)) {
                 availableCell.remove(b);
             }
         }
@@ -272,7 +263,7 @@ public class ChessboardComponent extends JComponent {
         availableCell.add(right);
         availableCell.add(left);
         for (ChessboardPoint b : a) {
-            if (!isMovable(b)) {
+            if (isMovable(b)) {
                 availableCell.remove(b);
             }
         }
@@ -433,13 +424,12 @@ public class ChessboardComponent extends JComponent {
                 a = false;
             }
         } catch (Exception e) {
-            a = true;
         }
 
         if (riverCell.contains(point)) {
             a = false;
         }
-        return a;
+        return !a;
     }
     private boolean isMouseMovable(ChessboardPoint point) {
         boolean a = true;
@@ -448,7 +438,6 @@ public class ChessboardComponent extends JComponent {
                 a = false;
             }
         } catch (Exception e) {
-            a = true;
         }
 
         return a;
