@@ -176,7 +176,11 @@ public class ChessGameFrame extends JFrame {
         button.addActionListener(e -> {
             System.out.println("Click load");
             String path = JOptionPane.showInputDialog(this,"Input Path here");
-            chessboardComponent.gameController.loadGameFromFile(path);
+            try{
+                chessboardComponent.gameController.loadGameFromFile(path);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         });
     }
     private void addRestartButton() {

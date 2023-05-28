@@ -203,11 +203,12 @@ public class Chessboard {
         return false;
     }
     public boolean isValidCapture67(ChessboardPoint src, ChessboardPoint dest) {
-        if (getChessPieceAt(src).getRank() == 6 || getChessPieceAt(src).getRank() == 7) {
+        if ((getChessPieceAt(src).getRank() == 6 || getChessPieceAt(src).getRank() == 7) && getChessPieceOwner(src) != getChessPieceOwner(dest)) {
             if (getChessPieceAt(src).getRank() >= getChessPieceAt(dest).getRank()) {
                 return (isValidToJump(src, dest) || calculateDistance(src, dest) == 1);
             }
-        }return false;
+        }
+        return false;
     }
     public boolean isValidToHome(ChessboardPoint src, ChessboardPoint dest) {
         if (getChessPieceAt(dest).getRank() == 9 && getChessPieceOwner(src) != getChessPieceOwner(dest)) {
@@ -225,14 +226,44 @@ public class Chessboard {
     public boolean isMovableToRiver(ChessboardPoint src){
         return getChessPieceAt(src).getRank() == 1;
     }
-    public boolean isValidToJump(ChessboardPoint src, ChessboardPoint des){
-        if (getChessPieceAt(src).getRank() == 6 || getChessPieceAt(src).getRank() == 7){
-            if (calculateDistance(src, des) == 3 || calculateDistance(src, des) == 4){
-                return isOnLand(des);
+    public boolean isValidToJump(ChessboardPoint src, ChessboardPoint des) {
+        if (getChessPieceAt(src).getRank() == 6 || getChessPieceAt(src).getRank() == 7) {
+            if (src.getCol() == des.getCol() && calculateDistance(src, des) == 4) {
+                if (src.getRow() >= des.getRow()) {
+                    return (isOnLand(des) && NoMouseRow(src.getRow(), des.getRow(), src.getCol()));
+                }else {
+                    return (isOnLand(des) && NoMouseRow(des.getRow(), src.getRow(), src.getCol()));
+                }
             }
-            return isOnLand(des);
+            if (src.getRow() == des.getRow() && calculateDistance(src, des) == 3) {
+                if (src.getCol() >= des.getCol()) {
+                    return (isOnLand(des) && NoMouseCol(src.getCol(), des.getCol(), src.getRow()));
+                }else {
+                    return (isOnLand(des) && NoMouseCol(des.getCol(), src.getCol(), src.getRow()));
+                }
+            }
         }
         return false;
+    }
+
+    public boolean NoMouseRow(int big, int small, int col) {
+        for (int i = small; i <= big; i++) {
+            if (grid[i][col].getPiece() == null) continue;
+            if (grid[i][col].getPiece().getRank() == 1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean NoMouseCol(int big, int small, int row) {
+        for (int i = small; i <= big; i++) {
+            if (grid[row][i].getPiece() == null) continue;
+            if (grid[row][i].getPiece().getRank() == 1) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }
