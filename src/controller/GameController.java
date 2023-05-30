@@ -67,10 +67,14 @@ public class GameController implements GameListener {
             for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
                 try {
                     if (model.grid[i][j].getPiece().getOwner().equals(PlayerColor.RED)) {
-                        BlueWin = 0;
+                        if (model.grid[i][j].getPiece().getRank() != 0 && model.grid[i][j].getPiece().getRank() != 9) {
+                            BlueWin = 0;
+                        }
                     }
                     if (model.grid[i][j].getPiece().getOwner().equals(PlayerColor.BLUE)) {
-                        RedWin = 0;
+                        if (model.grid[i][j].getPiece().getRank() != 0 && model.grid[i][j].getPiece().getRank() != 9) {
+                            RedWin = 0;
+                        }
                     }
                 }catch(Exception e){
                 }
@@ -282,6 +286,7 @@ public class GameController implements GameListener {
     public void loadGameFromFile(String path) {
         try{
             List<String> lines= Files.readAllLines(Path.of(path));
+            if(lines.size() == 0) return;
             model.removeAllPieces();
             model.initPieces(lines);
             view.removeChessComponent();

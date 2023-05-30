@@ -2,6 +2,7 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.util.Objects;
 
 /**
  * 这个类表示游戏过程中的整个游戏界面，是一切的载体
@@ -178,15 +179,15 @@ public class ChessGameFrame extends JFrame {
         add(button);
 
         button.addActionListener(e -> {
-           // String path = "";
+            String path = "";
             System.out.println("Click load");
-            String path = JOptionPane.showInputDialog(this,"Input Path here");
-            //JFileChooser chooser = new JFileChooser();
-            //chooser.setCurrentDirectory(new File(this.getClass().getResource("/").getPath()));
-            //int returnVal = chooser.showOpenDialog(this);
-            //if(returnVal == JFileChooser.APPROVE_OPTION) {
-            //    path = chooser.getSelectedFile().getName();
-            //}
+            // path = JOptionPane.showInputDialog(this,"Input Path here");
+            JFileChooser chooser = new JFileChooser();
+            chooser.setCurrentDirectory(new File(Objects.requireNonNull(this.getClass().getResource("/")).getPath()));
+            int returnVal = chooser.showOpenDialog(this);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                path = chooser.getSelectedFile().getName();
+            }
             try{
                 chessboardComponent.gameController.loadGameFromFile(path);
             } catch (Exception ex) {
