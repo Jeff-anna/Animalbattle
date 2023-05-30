@@ -1,15 +1,15 @@
 package model;
 
 public enum CellType {
-    SPRING_GRASS,
-    SPRING_RIVER,
+    ORIGIN_GRASS,
+    TRAP,
+    ORIGIN_RIVER,
     AUTUMN_GRASS,
     AUTUMN_RIVER,
-    TRAP,
     DEN,
-    OTHER_GRASS,
     OTHER_RIVER,
     OTHER_TRAP,
     OTHER_DEN,
+    OTHER_GRASS,
     Selected_Cell
 }

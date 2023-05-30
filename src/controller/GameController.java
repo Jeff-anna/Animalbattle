@@ -6,6 +6,8 @@ import model.*;
 import view.*;
 import view.ChessGameFrame;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -220,6 +222,63 @@ public class GameController implements GameListener {
         }
     }
 
+    public void saveGameToFile(){
+        File file = new File("resource/load.txt");
+        try {
+            FileWriter writer=new FileWriter(file);
+            for (int i = 0; i < Constant.CHESSBOARD_ROW_SIZE.getNum(); i++) {
+                for (int j = 0; j < Constant.CHESSBOARD_COL_SIZE.getNum(); j++) {
+                    if(model.grid[i][j].getPiece()==null){
+                        writer.write("v");
+                    }else if(model.grid[i][j].getPiece().getRank()==8&&model.grid[i][j].getPiece().getOwner()==PlayerColor.BLUE){
+                        writer.write("a");
+                    }else if(model.grid[i][j].getPiece().getRank()==8&&model.grid[i][j].getPiece().getOwner()==PlayerColor.RED){
+                        writer.write("b");
+                    }else if(model.grid[i][j].getPiece().getRank()==7&&model.grid[i][j].getPiece().getOwner()==PlayerColor.BLUE){
+                        writer.write("c");
+                    }else if(model.grid[i][j].getPiece().getRank()==7&&model.grid[i][j].getPiece().getOwner()==PlayerColor.RED){
+                        writer.write("d");
+                    }else if(model.grid[i][j].getPiece().getRank()==6&&model.grid[i][j].getPiece().getOwner()==PlayerColor.BLUE){
+                        writer.write("e");
+                    }else if(model.grid[i][j].getPiece().getRank()==6&&model.grid[i][j].getPiece().getOwner()==PlayerColor.RED){
+                        writer.write("f");
+                    }else if(model.grid[i][j].getPiece().getRank()==5&&model.grid[i][j].getPiece().getOwner()==PlayerColor.BLUE){
+                        writer.write("g");
+                    }else if(model.grid[i][j].getPiece().getRank()==5&&model.grid[i][j].getPiece().getOwner()==PlayerColor.RED){
+                        writer.write("h");
+                    }else if(model.grid[i][j].getPiece().getRank()==4&&model.grid[i][j].getPiece().getOwner()==PlayerColor.BLUE){
+                        writer.write("i");
+                    }else if(model.grid[i][j].getPiece().getRank()==4&&model.grid[i][j].getPiece().getOwner()==PlayerColor.RED){
+                        writer.write("j");
+                    }else if(model.grid[i][j].getPiece().getRank()==3&&model.grid[i][j].getPiece().getOwner()==PlayerColor.BLUE){
+                        writer.write("k");
+                    }else if(model.grid[i][j].getPiece().getRank()==3&&model.grid[i][j].getPiece().getOwner()==PlayerColor.RED){
+                        writer.write("l");
+                    }else if(model.grid[i][j].getPiece().getRank()==2&&model.grid[i][j].getPiece().getOwner()==PlayerColor.BLUE){
+                        writer.write("m");
+                    }else if(model.grid[i][j].getPiece().getRank()==2&&model.grid[i][j].getPiece().getOwner()==PlayerColor.RED){
+                        writer.write("n");
+                    }else if(model.grid[i][j].getPiece().getRank()==1&&model.grid[i][j].getPiece().getOwner()==PlayerColor.BLUE){
+                        writer.write("o");
+                    }else if(model.grid[i][j].getPiece().getRank()==1&&model.grid[i][j].getPiece().getOwner()==PlayerColor.RED){
+                        writer.write("p");
+                    }else if(model.grid[i][j].getPiece().getRank()==0&&model.grid[i][j].getPiece().getOwner()==PlayerColor.BLUE){
+                        writer.write("t");
+                    }else if(model.grid[i][j].getPiece().getRank()==0&&model.grid[i][j].getPiece().getOwner()==PlayerColor.RED){
+                        writer.write("x");
+                    }else if(model.grid[i][j].getPiece().getRank()==9&&model.grid[i][j].getPiece().getOwner()==PlayerColor.BLUE){
+                        writer.write("r");
+                    }else if(model.grid[i][j].getPiece().getRank()==9&&model.grid[i][j].getPiece().getOwner()==PlayerColor.RED){
+                        writer.write("w");
+                    }
+                }
+                writer.write("\n");
+            }
+            writer.flush();
+            writer.close();
+        }catch(Exception e){
+        }
+    }
     public void loadGameFromFile(String path) {
         try{
             List<String> lines= Files.readAllLines(Path.of(path));

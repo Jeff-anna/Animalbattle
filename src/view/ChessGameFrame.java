@@ -63,6 +63,8 @@ public class ChessGameFrame extends JFrame {
         addRestartButton();
         addChangeThemeButton();
         addBackButton();
+        addSaveButton();
+        addTipsButton();
 
         Image image = new ImageIcon("resource/background/origin.jpg").getImage();
         image = image.getScaledInstance(1100, 810,Image.SCALE_DEFAULT);
@@ -155,6 +157,17 @@ public class ChessGameFrame extends JFrame {
             startFrame.setVisible(true);
         });
     }
+    private void addSaveButton() {
+        JButton button = new JButton("Save");
+        button.setLocation(HEIGHT+793, HEIGHT / 10 +270);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
+
+        button.addActionListener(e -> {
+            chessboardComponent.gameController.saveGameToFile();
+        });
+    }
 
 
     private void addLoadButton() {
@@ -165,14 +178,15 @@ public class ChessGameFrame extends JFrame {
         add(button);
 
         button.addActionListener(e -> {
-            String path = "";
+           // String path = "";
             System.out.println("Click load");
-            JFileChooser chooser = new JFileChooser();
-            chooser.setCurrentDirectory(new File(this.getClass().getResource("/").getPath()));
-            int returnVal = chooser.showOpenDialog(this);
-            if(returnVal == JFileChooser.APPROVE_OPTION) {
-                path = chooser.getSelectedFile().getName();
-            }
+            String path = JOptionPane.showInputDialog(this,"Input Path here");
+            //JFileChooser chooser = new JFileChooser();
+            //chooser.setCurrentDirectory(new File(this.getClass().getResource("/").getPath()));
+            //int returnVal = chooser.showOpenDialog(this);
+            //if(returnVal == JFileChooser.APPROVE_OPTION) {
+            //    path = chooser.getSelectedFile().getName();
+            //}
             try{
                 chessboardComponent.gameController.loadGameFromFile(path);
             } catch (Exception ex) {
@@ -187,6 +201,22 @@ public class ChessGameFrame extends JFrame {
         button.setFont(new Font("Rockwell", Font.BOLD, 20));
         add(button);
         button.addActionListener(e -> chessboardComponent.getGameController().reset());
+    }
+    private void addTipsButton() {
+        JButton button = new JButton("tips");
+        button.addActionListener((e) -> JOptionPane.showMessageDialog(this,
+                "1.小心对方的陷阱！你可能需要先派出一个先锋排雷？\n" +
+                        "2.狮子和老虎才是这片战场上行动能力最强的棋子。\n" +
+                        "3.狭路相逢先手胜？\n" +
+                        "4.记得留下’护卫‘来保证陷阱发挥作用。\n" +
+                        "5.担心被老虎和狮子撕开防线吗？试试用老鼠阻碍进攻吧！\n" +
+                        "6.在旁边有老鼠的情况下，即使是大象也不敢轻举妄动哦！\n" +
+                        "7.进攻之余，别忘了防御阵线的布置！\n" +
+                        "8.遇到困难时，不妨先保存游戏，休息一下吧！"));
+        button.setLocation(HEIGTH, HEIGTH / 10 + 50);
+        button.setSize(200, 60);
+        button.setFont(new Font("Rockwell", Font.BOLD, 20));
+        add(button);
     }
 
     public static JLabel getTurnlabel() {
@@ -211,5 +241,8 @@ public class ChessGameFrame extends JFrame {
 
     public static JLabel getWinlabel() {
         return winlabel;
+    }
+    public boolean getOriginal(){
+        return original;
     }
 }

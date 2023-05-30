@@ -48,7 +48,7 @@ public class ColorFrame extends JFrame {
             if (s.equals("Grass")){
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 7; j++) {
-                        if (cellcomponent[i][j].type == CellType.SPRING_GRASS
+                        if (cellcomponent[i][j].type == CellType.ORIGIN_GRASS
                                 || cellcomponent[i][j].type == CellType.AUTUMN_GRASS
                                 || cellcomponent[i][j].type == CellType.OTHER_GRASS){
                             cellcomponent[i][j].type = CellType.OTHER_GRASS;
@@ -61,7 +61,7 @@ public class ColorFrame extends JFrame {
             } else if (s.equals("River")){
                 for (int i = 0; i < 9; i++) {
                     for (int j = 0; j < 7; j++) {
-                        if (cellcomponent[i][j].type == CellType.SPRING_RIVER
+                        if (cellcomponent[i][j].type == CellType.ORIGIN_RIVER
                                 || cellcomponent[i][j].type == CellType.AUTUMN_RIVER
                                 || cellcomponent[i][j].type == CellType.OTHER_RIVER){
                             cellcomponent[i][j].type = CellType.OTHER_RIVER;

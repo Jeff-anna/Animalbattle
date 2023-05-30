@@ -156,7 +156,7 @@ public class ChessboardComponent extends JComponent {
                 ChessboardPoint temp = new ChessboardPoint(i, j);
                 CellComponent cell;
                 if (riverCell.contains(temp)) {
-                    cell = new CellComponent(CellType.SPRING_RIVER, calculatePoint(i, j), CHESS_SIZE);
+                    cell = new CellComponent(CellType.ORIGIN_RIVER, calculatePoint(i, j), CHESS_SIZE);
                     //ADD(CELL)MEANS WHAT????????????WHA DOSE THIS REFERS TO????????????
                     this.add(cell);
                 } else if (trapCell.contains(temp)) {
@@ -166,7 +166,7 @@ public class ChessboardComponent extends JComponent {
                     cell = new CellComponent(CellType.DEN, calculatePoint(i, j), CHESS_SIZE);
                     this.add(cell);
                 } else {
-                    cell = new CellComponent(CellType.SPRING_GRASS, calculatePoint(i, j), CHESS_SIZE);
+                    cell = new CellComponent(CellType.ORIGIN_GRASS, calculatePoint(i, j), CHESS_SIZE);
                     this.add(cell);
                 }
 
@@ -307,9 +307,9 @@ public class ChessboardComponent extends JComponent {
                 ChessboardPoint temp = new ChessboardPoint(i, j);
                 if (availableCell.contains(temp)) {
                     if (riverCell.contains(temp)) {
-                        getGridComponentAt(temp).type = CellType.SPRING_RIVER;
+                        getGridComponentAt(temp).type = CellType.ORIGIN_RIVER;
                     }else {
-                        getGridComponentAt(temp).type = CellType.SPRING_GRASS;
+                        getGridComponentAt(temp).type = CellType.ORIGIN_GRASS;
                     }
                 }
                 repaint();
@@ -370,22 +370,22 @@ public class ChessboardComponent extends JComponent {
     public void changeTheme(boolean isSpring) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 7; j++) {
-                if (gridComponents[i][j].type == CellType.SPRING_GRASS)
+                if (gridComponents[i][j].type == CellType.ORIGIN_GRASS)
                     gridComponents[i][j].type = CellType.AUTUMN_GRASS;
-                else if (gridComponents[i][j].type == CellType.SPRING_RIVER)
+                else if (gridComponents[i][j].type == CellType.ORIGIN_RIVER)
                     gridComponents[i][j].type = CellType.AUTUMN_RIVER;
                 else if (gridComponents[i][j].type == CellType.AUTUMN_GRASS)
-                    gridComponents[i][j].type = CellType.SPRING_GRASS;
+                    gridComponents[i][j].type = CellType.ORIGIN_GRASS;
                 else if (gridComponents[i][j].type == CellType.AUTUMN_RIVER)
-                    gridComponents[i][j].type = CellType.SPRING_RIVER;
+                    gridComponents[i][j].type = CellType.ORIGIN_RIVER;
                 else if (gridComponents[i][j].type == CellType.OTHER_GRASS && isSpring)
                     gridComponents[i][j].type = CellType.AUTUMN_GRASS;
                 else if (gridComponents[i][j].type == CellType.OTHER_RIVER && isSpring)
                     gridComponents[i][j].type = CellType.AUTUMN_RIVER;
                 else if (gridComponents[i][j].type == CellType.OTHER_GRASS && !isSpring)
-                    gridComponents[i][j].type = CellType.SPRING_GRASS;
+                    gridComponents[i][j].type = CellType.ORIGIN_GRASS;
                 else if (gridComponents[i][j].type == CellType.OTHER_RIVER && !isSpring)
-                    gridComponents[i][j].type = CellType.SPRING_RIVER;
+                    gridComponents[i][j].type = CellType.ORIGIN_RIVER;
                 else if (gridComponents[i][j].type == CellType.OTHER_TRAP) gridComponents[i][j].type = CellType.TRAP;
                 else if (gridComponents[i][j].type == CellType.OTHER_DEN) gridComponents[i][j].type = CellType.DEN;
             }
@@ -454,4 +454,40 @@ public class ChessboardComponent extends JComponent {
         }
         return false;
     }
+    private boolean mouseBuffered(ChessboardPoint src,ChessboardPoint dest){
+        boolean a=false;
+        try {
+            if (src.getRow() == dest.getRow()) {
+                if (dest.getCol() > src.getCol()) {
+                    if (gridComponents[src.getRow()][src.getCol() + 1].getComponent(0) instanceof MouseChessComponent
+                            || gridComponents[src.getRow()][src.getCol() + 2].getComponent(0) instanceof MouseChessComponent) {
+                        a = true;
+                    }
+                }else if (dest.getCol() < src.getCol()) {
+                    if (gridComponents[src.getRow()][src.getCol() - 1].getComponent(0) instanceof MouseChessComponent
+                            || gridComponents[src.getRow()][src.getCol() - 2].getComponent(0) instanceof MouseChessComponent) {
+                        a = true;
+                    }
+                }
+            }
+            if (src.getCol() == dest.getCol()) {
+                if (dest.getRow() > src.getRow()) {
+                    if (gridComponents[src.getRow() + 1][src.getCol()].getComponent(0) instanceof MouseChessComponent
+                            || gridComponents[src.getRow() + 2][src.getCol()].getComponent(0) instanceof MouseChessComponent
+                            || gridComponents[src.getRow() + 3][src.getCol()].getComponent(0) instanceof MouseChessComponent) {
+                        a = true;
+                    }
+                }else if (dest.getRow() < src.getRow()) {
+                    if (gridComponents[src.getRow() - 1][src.getCol()].getComponent(0) instanceof MouseChessComponent
+                            || gridComponents[src.getRow() - 2][src.getCol()].getComponent(0) instanceof MouseChessComponent
+                            || gridComponents[src.getRow() - 3][src.getCol()].getComponent(0) instanceof MouseChessComponent) {
+                        a = true;
+                    }
+                }
+            }
+        }catch(Exception e){
+        }
+        return a;
+    }
+
 }

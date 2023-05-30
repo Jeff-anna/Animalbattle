@@ -29,8 +29,8 @@ public class CellComponent extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponents(g);
-        if (type == CellType.SPRING_GRASS) g.setColor(ChessboardComponent.springGrass);
-        else if (type == CellType.SPRING_RIVER) g.setColor(ChessboardComponent.springRiver);
+        if (type == CellType.ORIGIN_GRASS) g.setColor(ChessboardComponent.springGrass);
+        else if (type == CellType.ORIGIN_RIVER) g.setColor(ChessboardComponent.springRiver);
         else if (type == CellType.AUTUMN_GRASS) g.setColor(ChessboardComponent.lavaGrass);
         else if (type == CellType.AUTUMN_RIVER) g.setColor(ChessboardComponent.lavaRiver);
         else if (type == CellType.TRAP) g.setColor(ChessboardComponent.trapColor);
